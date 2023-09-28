@@ -55,4 +55,17 @@ public class dcpMode extends LinearOpMode {
         frontRightMotor.setPower(frontRightPower);
         backRightMotor.setPower(backRightPower);
     }
+
+    public void commandsRobotController()
+    {
+        double extendVipers=gamepad1.right_trigger;
+        double retractVipers=-gamepad1.left_trigger;
+        if(extendVipers>0) {
+            System.out.println("Viper extends");
+            //controlvipers(extendVipers);
+        } else if (retractVipers<0){
+            System.out.println("Viper retracts");
+            //controlvipers(retractVipers);
+        }
+    }
 }
