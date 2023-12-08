@@ -4,18 +4,22 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @TeleOp
 public class dcpMode extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
+        DcMotor vipersMotor = hardwareMap.get(DcMotor.class, "vipers");
+        controlArm controlArm = new controlArm();
 
         waitForStart();
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
           movementWheels();
-          robotArmController();
+          controlArm.robotArmController(vipersMotor);
+          telemetry.update();
         }
     }
 
@@ -50,16 +54,5 @@ public class dcpMode extends LinearOpMode {
         backRightMotor.setPower(backRightPower);
     }
 
-    public void robotArmController()
-    {
-        double extendVipers=gamepad1.right_trigger;
-        double retractVipers=-gamepad1.left_trigger;
-        if(extendVipers>0) {
-            System.out.println("Viper extends");
-            //controlvipers(extendVipers);
-        } else if (retractVipers<0){
-            System.out.println("Viper retracts");
-            //controlvipers(retractVipers);
-        }
-    }
+
 }

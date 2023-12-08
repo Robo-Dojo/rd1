@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
-public class ColorSensorV3 extends Main {
+public class ColorSensorV3 {
     String detectedColor;
     int alphaValue;
     public String getColor(ColorSensor colorSensor) {
