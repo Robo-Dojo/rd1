@@ -4,21 +4,26 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 public class dcpMode extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         DcMotor vipersMotor = hardwareMap.get(DcMotor.class, "vipers");
-        controlArm controlArm = new controlArm();
+        DcMotor armMotor = hardwareMap.get(DcMotor.class,"arm");
+        Servo clawLifter = hardwareMap.get(Servo.class, "claw-lifter");
+        Servo clawOpener = hardwareMap.get(Servo.class, "claw-opener");
+        armController armController = new armController();
 
         waitForStart();
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
           movementWheels();
-          controlArm.robotArmController(vipersMotor);
+          armController.vipersController(vipersMotor);
+          armController.armLifter(armMotor);
+          armController.clawController(clawLifter,clawOpener);
           telemetry.update();
         }
     }
