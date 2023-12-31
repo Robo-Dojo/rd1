@@ -14,6 +14,7 @@ public class dcpMode extends LinearOpMode {
         DcMotor armMotor = hardwareMap.get(DcMotor.class,"arm");
         Servo clawLifter = hardwareMap.get(Servo.class, "claw-lifter");
         Servo clawOpener = hardwareMap.get(Servo.class, "claw-opener");
+        Servo servoDrone = hardwareMap.get(Servo.class,"drone-launcher");
         armController armController = new armController();
 
         waitForStart();
@@ -24,6 +25,7 @@ public class dcpMode extends LinearOpMode {
           armController.vipersController(vipersMotor);
           armController.armLifter(armMotor);
           armController.clawController(clawLifter,clawOpener);
+          droneLauncher.droneReleaser(servoDrone);
           telemetry.update();
         }
     }
