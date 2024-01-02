@@ -14,6 +14,7 @@ public class dcpMode extends LinearOpMode {
         // region initialize all robot components & classes needed for dcpMode
         DcMotor armLifterMotor = hardwareMap.get(DcMotor.class,"armLifterMotor");
         //Servo pixelDropperServo = hardwareMap.get(Servo.class, "pixel-dropper-servo");
+        Servo servoDrone = hardwareMap.get(Servo.class,"drone-launcher");
 
         // motor declaration
         DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
@@ -36,6 +37,8 @@ public class dcpMode extends LinearOpMode {
             // control the components of the arm
             ArmController.armLifter(gamepad2 ,armLifterMotor, telemetry);
             //ArmController.pixelDropper(pixelDropperServo);
+
+            droneLauncher.droneReleaser(gamepad2 ,servoDrone, telemetry);
 
             // update all telemetry visual data
             telemetry.update();
