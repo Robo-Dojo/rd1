@@ -12,8 +12,8 @@ public class dcpMode extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // region initialize all robot components & classes needed for dcpMode
-        DcMotor armLifterMotor = hardwareMap.get(DcMotor.class,"arm-lifter-motor");
-        Servo pixelDropperServo = hardwareMap.get(Servo.class, "pixel-dropper-servo");
+        DcMotor armLifterMotor = hardwareMap.get(DcMotor.class,"armLifterMotor");
+        //Servo pixelDropperServo = hardwareMap.get(Servo.class, "pixel-dropper-servo");
 
         // motor declaration
         DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
@@ -31,11 +31,11 @@ public class dcpMode extends LinearOpMode {
         // running functions while dcpMode is active
         while (opModeIsActive()) {
             // control the movement of the robot chassis
-            ChassyController.movementWheels(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+            ChassyController.movementWheels(gamepad1 ,frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 
             // control the components of the arm
-            ArmController.armLifter(armLifterMotor);
-            ArmController.pixelDropper(pixelDropperServo);
+            ArmController.armLifter(gamepad2 ,armLifterMotor, telemetry);
+            //ArmController.pixelDropper(pixelDropperServo);
 
             // update all telemetry visual data
             telemetry.update();
