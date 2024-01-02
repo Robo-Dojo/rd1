@@ -8,9 +8,10 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gam
 // endregion
 
 public class ChassyController {
-    public void movementWheels(Gamepad _gamepad1, DcMotor frontLeftMotor, DcMotor backLeftMotor, DcMotor frontRightMotor, DcMotor backRightMotor)
+    public void movementWheels(Gamepad _gamepad1, DcMotor frontLeftMotor, DcMotor rearLeftMotor, DcMotor frontRightMotor, DcMotor rearRightMotor)
     {
 
+        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // read values gamepad 1
@@ -20,15 +21,15 @@ public class ChassyController {
 
         // calculate engines power
         double denominator = Math.max(Math.abs(gp1Y) + Math.abs(gp1X) + Math.abs(gp1RotationX), 1);
-        double frontLeftPower = (gp1Y + gp1X + gp1RotationX) / denominator;
-        double backLeftPower = (gp1Y - gp1X + gp1RotationX) / denominator;
-        double frontRightPower = (gp1Y - gp1X - gp1RotationX) / denominator;
-        double backRightPower = (gp1Y + gp1X - gp1RotationX) / denominator;
+        double frontLeftPower = (gp1Y - gp1X + gp1RotationX) / denominator;
+        double rearLeftPower = (gp1Y + gp1X + gp1RotationX) / denominator;
+        double frontRightPower = (gp1Y + gp1X - gp1RotationX) / denominator;
+        double rearRightPower = (gp1Y - gp1X - gp1RotationX) / denominator;
 
         // assign values to engines
         frontLeftMotor.setPower(frontLeftPower);
-        backLeftMotor.setPower(backLeftPower);
+        rearLeftMotor.setPower(rearLeftPower);
         frontRightMotor.setPower(frontRightPower);
-        backRightMotor.setPower(backRightPower);
+        rearRightMotor.setPower(rearRightPower);
     }
 }

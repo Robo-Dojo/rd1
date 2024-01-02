@@ -14,13 +14,13 @@ public class dcpMode extends LinearOpMode {
         // region initialize all robot components & classes needed for dcpMode
         DcMotor armLifterMotor = hardwareMap.get(DcMotor.class,"armLifterMotor");
         //Servo pixelDropperServo = hardwareMap.get(Servo.class, "pixel-dropper-servo");
-        Servo servoDrone = hardwareMap.get(Servo.class,"drone-launcher");
+        //Servo servoDrone = hardwareMap.get(Servo.class,"drone-launcher");
 
         // motor declaration
         DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+        DcMotor rearLeftMotor = hardwareMap.dcMotor.get("rearLeftMotor");
         DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        DcMotor rearRightMotor = hardwareMap.dcMotor.get("rearRightMotor");
 
         ArmController ArmController = new ArmController();
         ChassyController ChassyController = new ChassyController();
@@ -32,13 +32,13 @@ public class dcpMode extends LinearOpMode {
         // running functions while dcpMode is active
         while (opModeIsActive()) {
             // control the movement of the robot chassis
-            ChassyController.movementWheels(gamepad1 ,frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+            ChassyController.movementWheels(gamepad1 ,frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 
             // control the components of the arm
             ArmController.armLifter(gamepad2 ,armLifterMotor, telemetry);
             //ArmController.pixelDropper(pixelDropperServo);
 
-            droneLauncher.droneReleaser(gamepad2 ,servoDrone, telemetry);
+            //droneLauncher.droneReleaser(gamepad2 ,servoDrone, telemetry);
 
             // update all telemetry visual data
             telemetry.update();
