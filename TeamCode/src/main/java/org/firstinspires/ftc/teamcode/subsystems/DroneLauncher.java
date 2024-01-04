@@ -1,13 +1,11 @@
-package org.firstinspires.ftc.teamcode;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class droneLauncher {
+public class DroneLauncher {
     //class for the drone lanucher
 
     public static void droneReleaser(Gamepad _gamepad2, Servo servoDrone, Telemetry telemetry) {

@@ -1,5 +1,5 @@
 // region imports
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -10,10 +10,6 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gam
 public class ChassyController {
     public void movementWheels(Gamepad _gamepad1, DcMotor frontLeftMotor, DcMotor rearLeftMotor, DcMotor frontRightMotor, DcMotor rearRightMotor)
     {
-
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
         // read values gamepad 1
         double gp1Y = -_gamepad1.left_stick_y;
         double gp1X = -_gamepad1.left_stick_x;
