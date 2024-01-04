@@ -1,6 +1,7 @@
 //region imports
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -9,100 +10,67 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name = "TestAutonom1")
 public class AutonomousMode extends LinearOpMode {
-
-    private DcMotor RightDrive;
-    private DcMotor LeftDrive;
-    private DcMotor Arm;
-    private DcMotor Intake;
-
-    //Convert from the counts per revolution of the encoder to counts per inch
-    static final double HD_COUNTS_PER_REV = 28;
-    static final double DRIVE_GEAR_REDUCTION = 20.15293;
-    static final double WHEEL_CIRCUMFERENCE_MM = 90 * Math.PI;
-    static final double DRIVE_COUNTS_PER_MM = (HD_COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_MM;
-    static final double DRIVE_COUNTS_PER_IN = DRIVE_COUNTS_PER_MM * 25.4;
-
-    //Create elapsed time variable and an instance of elapsed time
-    private ElapsedTime runtime = new ElapsedTime();
+    HardwareInit rd1 = new HardwareInit();
 
     // Drive function with 3 parameters
-    private void drive(double power, double leftInches, double rightInches) {
-        int rightTarget;
-        int leftTarget;
+    private void drive(double power, int frontRightTicks, int frontLeftTicks, int rearRightTicks, int rearLeftTicks) {
+        int frontRightTarget;
+        int frontLeftTarget;
+        int rearLeftTarget;
+        int rearRightTarget;
 
         if (opModeIsActive()) {
             // Create target positions
-            rightTarget = RightDrive.getCurrentPosition() + (int) (rightInches * DRIVE_COUNTS_PER_IN);
-            leftTarget = LeftDrive.getCurrentPosition() + (int) (leftInches * DRIVE_COUNTS_PER_IN);
+            frontRightTarget = rd1.frontRightMotor.getCurrentPosition() + frontRightTicks;
+            frontLeftTarget = rd1.frontLeftMotor.getCurrentPosition() + frontLeftTicks;
+            rearRightTarget = rd1.rearRightMotor.getCurrentPosition() + rearRightTicks;
+            rearLeftTarget = rd1.rearLeftMotor.getCurrentPosition() + rearLeftTicks;
 
             // set target position
-            LeftDrive.setTargetPosition(leftTarget);
-            RightDrive.setTargetPosition(rightTarget);
+            rd1.frontRightMotor.setTargetPosition(frontLeftTarget);
+            rd1.frontLeftMotor.setTargetPosition(frontRightTarget);
+            rd1.rearRightMotor.setTargetPosition(rearLeftTarget);
+            rd1.rearLeftMotor.setTargetPosition(rearRightTarget);
 
             //switch to run to position mode
-            LeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rd1.frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rd1.frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rd1.rearRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rd1.rearLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            //run to position at the desiginated power
-            LeftDrive.setPower(power);
-            RightDrive.setPower(power);
+            //run to position at the designated power
+            rd1.frontRightMotor.setPower(power);
+            rd1.frontLeftMotor.setPower(power);
+            rd1.rearRightMotor.setPower(power);
+            rd1.rearLeftMotor.setPower(power);
 
-            // wait until both motors are no longer busy running to position
-            while (opModeIsActive() && (LeftDrive.isBusy() || RightDrive.isBusy())) {
+            // wait until all motors are no longer busy running to position
+            while (opModeIsActive() && (rd1.frontRightMotor.isBusy() || rd1.frontLeftMotor.isBusy() || rd1.rearLeftMotor.isBusy() || rd1.rearRightMotor.isBusy())) {
+                idle();
             }
 
             // set motor power back to 0
-            LeftDrive.setPower(0);
-            RightDrive.setPower(0);
+            rd1.frontRightMotor.setPower(0);
+            rd1.frontLeftMotor.setPower(0);
+            rd1.rearRightMotor.setPower(0);
+            rd1.rearLeftMotor.setPower(0);
         }
     }
 
-
     @Override
     public void runOpMode() {
-
-        RightDrive = hardwareMap.get(DcMotor.class, "RightDrive");
-        LeftDrive = hardwareMap.get(DcMotor.class, "LeftDrive");
-
-
-        LeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        rd1.init(hardwareMap);
 
         waitForStart();
+
+        // TODO: code all steps
         if (opModeIsActive()) {
+            // wait for team prop detection
 
             //segment 1
-            drive(0.7, 30, 15);
+            drive(0.7, 30, 15, 30, 15);
 
-            runtime.reset(); // reset elapsed time timer
 
-            //segment 2 - lift arm, drive to shipping hub, outtake freight
-            while (opModeIsActive() && runtime.seconds() <= 7) {
-
-                //lift arm and hold
-                Arm.setTargetPosition(120);
-                Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                Arm.setPower(0.3);
-
-                //drive forward for 1 second
-                while (runtime.seconds() > 2 && runtime.seconds() <= 3) {
-                    drive(0.4, 4, 4);
-                }
-
-                //run intake
-                while (runtime.seconds() > 4 && runtime.seconds() <= 7) {
-                    Intake.setPower(-0.6);
-                }
-
-                // turn off arm and intake
-                Arm.setPower(0);
-                Intake.setPower(0);
-
-                //segment 3 - reverse to get better angle
-                drive(0.7, -15, -30);
-
-                //segment 4 - drive into warehouse
-                drive(1, 90, 90);
-            }
         }
     }
 }
