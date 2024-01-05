@@ -13,7 +13,7 @@ public class ArmController {
     public void armLifter(Gamepad _gamepad2, DcMotor armMotor, Telemetry telemetry)
     {
         // get joystick params
-        double armLifter= _gamepad2.right_stick_y;
+        double armLifter= -_gamepad2.right_stick_y*0.5;
 
         // telemetry code for dev purpose
         if(armLifter<0) {
