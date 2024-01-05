@@ -23,7 +23,7 @@ public class DcpMode extends LinearOpMode {
         // running functions while dcpMode is active
         while (opModeIsActive()) {
             // control the movement of the robot chassis
-            ChassyController.movementWheels(gamepad1 ,rd1.frontLeftMotor, rd1.rearLeftMotor, rd1.frontRightMotor, rd1.rearRightMotor);
+            ChassyController.dcpMovement(gamepad1 ,rd1.frontLeftMotor, rd1.rearLeftMotor, rd1.frontRightMotor, rd1.rearRightMotor);
 
             // control the components of the arm
             ArmController.armLifter(gamepad2 ,rd1.armLifterMotor, telemetry);

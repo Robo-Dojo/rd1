@@ -1,11 +1,7 @@
 //region imports
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.ChassyController;
 //endregion
@@ -45,7 +41,7 @@ public class AutonomousMode extends LinearOpMode {
             //EX: ChassyController.drive(0.7, 250, 500, 250, 500);
 
             //segment 2
-            ChassyController.drive(0.7, 30, 15, 30, 15);
+            ChassyController.autonomousMovement(0.7, 30, 15, 30, 15);
 
 
         }

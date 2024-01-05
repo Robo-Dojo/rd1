@@ -1,16 +1,13 @@
 // region imports
 package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
-
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
 
 import org.firstinspires.ftc.teamcode.HardwareInit;
 // endregion
 
 public class ChassyController {
-    public void movementWheels(Gamepad _gamepad1, DcMotor frontLeftMotor, DcMotor rearLeftMotor, DcMotor frontRightMotor, DcMotor rearRightMotor)
+    public void dcpMovement(Gamepad _gamepad1, DcMotor frontLeftMotor, DcMotor rearLeftMotor, DcMotor frontRightMotor, DcMotor rearRightMotor)
     {
         // read values gamepad 1
         double gp1Y = -_gamepad1.left_stick_y;
@@ -31,7 +28,7 @@ public class ChassyController {
         rearRightMotor.setPower(rearRightPower);
     }
 
-    public static void drive(double power, int frontRightTicks, int frontLeftTicks, int rearRightTicks, int rearLeftTicks) {
+    public static void autonomousMovement(double power, int frontRightTicks, int frontLeftTicks, int rearRightTicks, int rearLeftTicks) {
         HardwareInit rd1 = new HardwareInit();
 
         int frontRightTarget;
