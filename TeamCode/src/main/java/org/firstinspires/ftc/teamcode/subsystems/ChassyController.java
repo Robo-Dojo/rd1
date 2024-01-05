@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+
+import org.firstinspires.ftc.teamcode.HardwareInit;
 // endregion
 
 public class ChassyController {
@@ -28,4 +30,48 @@ public class ChassyController {
         frontRightMotor.setPower(frontRightPower);
         rearRightMotor.setPower(rearRightPower);
     }
+
+    public static void drive(double power, int frontRightTicks, int frontLeftTicks, int rearRightTicks, int rearLeftTicks) {
+        HardwareInit rd1 = new HardwareInit();
+
+        int frontRightTarget;
+        int frontLeftTarget;
+        int rearLeftTarget;
+        int rearRightTarget;
+
+        // Create target positions
+        frontRightTarget = rd1.frontRightMotor.getCurrentPosition() + frontRightTicks;
+        frontLeftTarget = rd1.frontLeftMotor.getCurrentPosition() + frontLeftTicks;
+        rearRightTarget = rd1.rearRightMotor.getCurrentPosition() + rearRightTicks;
+        rearLeftTarget = rd1.rearLeftMotor.getCurrentPosition() + rearLeftTicks;
+
+        // set target position
+        rd1.frontRightMotor.setTargetPosition(frontLeftTarget);
+        rd1.frontLeftMotor.setTargetPosition(frontRightTarget);
+        rd1.rearRightMotor.setTargetPosition(rearLeftTarget);
+        rd1.rearLeftMotor.setTargetPosition(rearRightTarget);
+
+        //switch to run to position mode
+        rd1.frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rd1.frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rd1.rearRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rd1.rearLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //run to position at the designated power
+        rd1.frontRightMotor.setPower(power);
+        rd1.frontLeftMotor.setPower(power);
+        rd1.rearRightMotor.setPower(power);
+        rd1.rearLeftMotor.setPower(power);
+
+        // wait until all motors are no longer busy running to position
+        while (rd1.frontRightMotor.isBusy() || rd1.frontLeftMotor.isBusy() || rd1.rearLeftMotor.isBusy() || rd1.rearRightMotor.isBusy()) {
+            // do nothing
+        }
+
+        // set motor power back to 0
+        rd1.frontRightMotor.setPower(0);
+        rd1.frontLeftMotor.setPower(0);
+        rd1.rearRightMotor.setPower(0);
+        rd1.rearLeftMotor.setPower(0);
+        }
 }
