@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode;
-
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -14,10 +14,11 @@ public class HardwareInit {
     public Servo pixelDropperServo = null;
     public Servo servoDrone = null;
     public DcMotor pixelGrabber = null;
+    public WebcamName webcam;
 
     HardwareMap hwMap = null;
 
-    public void init(HardwareMap hardwareMap){
+    public void init(HardwareMap hardwareMap, boolean isAutonom){
         hwMap = hardwareMap;
 
         // motor declaration
@@ -27,17 +28,32 @@ public class HardwareInit {
         rearRightMotor = hwMap.dcMotor.get("rearRightMotor");
         pixelGrabber = hwMap.dcMotor.get("pixelGrabber");
 
-        // specify motors run with encoders
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rearLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rearRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        if (isAutonom) {
+            // specify motors run with encoders
+            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        } else {
+            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            // specify motors run with encoders
+            frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            rearLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            rearRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
 
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        //frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         armLifterMotor = hwMap.get(DcMotor.class,"armLifterMotor");
         pixelDropperServo = hwMap.get(Servo.class, "pixelDropperServo");
         servoDrone = hwMap.get(Servo.class,"droneLauncher");
+
+        webcam = hwMap.get(WebcamName.class, "Webcam");
     }
 }

@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.subsystems.ObjectDetection;
 //endregion
 
-@Autonomous(name = "TestAutonom1")
-public class AutonomousMode extends LinearOpMode {
+@Autonomous(name = "TestAutonom4")
+public class AutonomusMode4 extends LinearOpMode {
     HardwareInit rd1 = new HardwareInit();
     ObjectDetection objDet = new ObjectDetection();
 
@@ -101,68 +101,16 @@ public class AutonomousMode extends LinearOpMode {
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
-            if(objectDetectionResult == 1){
-                // goes to designated line
-                drive(0.2,-600,-1800,-600,-1800);
-                // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-                drive(0.7,-3214,3214,3214,-3214);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-            }
-            else if(objectDetectionResult == 2){
-                // goes to designated line
-                drive(0.2, -800,-800,-800,-800);
-                drive(0.2, -500, -500, -500, -500);
-                // go back to backdrop trajectory
-                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-                drive(0.7,-3214,3214,3214,-3214);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-            }
-            else{
-                // goes to designated line
-                drive(0.2,-1800,-600,-1800,-600);
-                // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-                drive(0.7,-3214,3214,3214,-3214);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-            }
-
-
-
-
-            //autonomus 2 (n-am idee unde sa o pun)
             if(objectDetectionResult==1)
             {
                 //goes to designated line
                 drive(0.2,-600,-1800,-600,-1800);
-                // bo back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                // go to backdrop playing field
-                drive(0.7,-3214,3214,3214,-3214);
+                // go back to backdrop trajectory
+                drive(0.2, 0,1200,0,1200);
                 // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
+                drive(0.2, +893,+893,+893,+893);
                 // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
+                drive(0.2,-2100,-900,-2100,-800); //daca nu merge pune rearRightTicks -800
                 // drive to backdrop
                 drive(0.2,-1161,-1161,-1161,-1161);
             }
@@ -174,9 +122,9 @@ public class AutonomousMode extends LinearOpMode {
                 // go back to backdrop trajectory
                 drive(0.2,360,360,360,360);
                 // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
+                drive(0.2, +893,+893,+893,+893);
                 // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
+                drive(0.2,-2100,-900,-2100,-800);
                 // drive to backdrop
                 drive(0.2,-1161,-1161,-1161,-1161);
 
@@ -189,12 +137,20 @@ public class AutonomousMode extends LinearOpMode {
                 drive(0.2, 1200,0,1200,0);
                 drive(0.2,360,360,360,360);
                 // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
+                drive(0.2, +893,+893,+893,+893);
                 // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
+                drive(0.2,-2100,-900,-2100,-800);
                 // drive to backdrop
                 drive(0.2,-1161,-1161,-1161,-1161);
             }
+
+
+
+
+
+
+
+
 
             //inaintat la zona cu linii
             //Asta e buna pentru Linia 1

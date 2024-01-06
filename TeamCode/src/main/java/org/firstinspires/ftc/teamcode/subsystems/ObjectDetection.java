@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
@@ -18,11 +17,7 @@ import java.util.List;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@TeleOp(name = "Concept: TensorFlow Object Detection", group = "Concept")
-public class ObjectDetection extends LinearOpMode {
-
-    private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
-
+public class ObjectDetection {
     // TFOD_MODEL_ASSET points to a model file stored in the project Asset location,
     // this is only used for Android Studio when using models in Assets.
 
@@ -47,46 +42,92 @@ public class ObjectDetection extends LinearOpMode {
      */
     private VisionPortal visionPortal;
 
-    @Override
-    public void runOpMode() {
+    public int getResult(WebcamName webcam, Telemetry telemetry) {
+        // Declare result and part of screen size variables
+        int result = 0;
+        int partScreenSize = 426;
 
-        initTfod();
+        // Declare X and Y variables
+        double teamPropX = 0;
+        double teamPropY = 0;
 
-        // Wait for the DS start button to be touched.
-        telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
-        telemetry.addData(">", "Touch Play to start OpMode");
-        telemetry.update();
-        waitForStart();
+        // Initialise processor
+        initTfod(webcam);
 
-        if (opModeIsActive()) {
-            while (opModeIsActive()) {
-
-                telemetryTfod();
-
-                // Push telemetry to the Driver Station.
-                telemetry.update();
-
-                // Save CPU resources; can resume streaming when needed.
-                if (gamepad1.dpad_down) {
-                    visionPortal.stopStreaming();
-                } else if (gamepad1.dpad_up) {
-                    visionPortal.resumeStreaming();
+        for(int i=0; i < 100; i++) {
+            List<Recognition> currentRecognitions = tfod.getRecognitions();
+            for (Recognition recognition : currentRecognitions) {
+                teamPropX = (recognition.getLeft() + recognition.getRight()) / 2 ;
+                teamPropY = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+                if(teamPropX != 0 || teamPropY != 0) {
+                    break;
                 }
-
-                // Share the CPU.
-                sleep(20);
+            }
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            if(teamPropX != 0 || teamPropY != 0) {
+                break;
             }
         }
 
-        // Save more CPU resources when camera is no longer needed.
-        visionPortal.close();
+        telemetry.addData("Position", "%.0f / %.0f", teamPropX, teamPropY);
 
-    }   // end runOpMode()
+        tfod.shutdown();
+
+        if (teamPropX == 0) {
+            result = 3;
+        } else if (teamPropX < partScreenSize) {
+            result = 1;
+        } else {
+            result = 2;
+        }
+
+        return result;
+    }
+
+//    @Override
+//    public void runOpMode() {
+//
+//        initTfod();
+//
+//        // Wait for the DS start button to be touched.
+//        telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
+//        telemetry.addData(">", "Touch Play to start OpMode");
+//        telemetry.update();
+//        waitForStart();
+//
+//        if (opModeIsActive()) {
+//            while (opModeIsActive()) {
+//
+//                telemetryTfod();
+//
+//                // Push telemetry to the Driver Station.
+//                telemetry.update();
+//
+//                // Save CPU resources; can resume streaming when needed.
+//                if (gamepad1.dpad_down) {
+//                    visionPortal.stopStreaming();
+//                } else if (gamepad1.dpad_up) {
+//                    visionPortal.resumeStreaming();
+//                }
+//
+//                // Share the CPU.
+//                sleep(20);
+//            }
+//        }
+//
+//        // Save more CPU resources when camera is no longer needed.
+//        visionPortal.close();
+//
+//    }   // end runOpMode()
 
     /**
      * Initialize the TensorFlow Object Detection processor.
      */
-    private void initTfod() {
+    private void initTfod(WebcamName webcam) {
 
         // Create the TensorFlow processor by using a builder.
         tfod = new TfodProcessor.Builder()
@@ -113,11 +154,7 @@ public class ObjectDetection extends LinearOpMode {
         VisionPortal.Builder builder = new VisionPortal.Builder();
 
         // Set the camera (webcam vs. built-in RC phone camera).
-        if (USE_WEBCAM) {
-            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam"));
-        } else {
-            builder.setCamera(BuiltinCameraDirection.BACK);
-        }
+        builder.setCamera(webcam);
 
         // Choose a camera resolution. Not all cameras support all resolutions.
         //builder.setCameraResolution(new Size(640, 480));
@@ -126,7 +163,7 @@ public class ObjectDetection extends LinearOpMode {
         //builder.enableLiveView(true);
 
         // Set the stream format; MJPEG uses less bandwidth than default YUY2.
-        //builder.setStreamFormat(VisionPortal.StreamFormat.YUY2);
+        builder.setStreamFormat(VisionPortal.StreamFormat.MJPEG);
 
         // Choose whether or not LiveView stops if no processors are enabled.
         // If set "true", monitor shows solid orange screen if no processors enabled.
@@ -140,7 +177,7 @@ public class ObjectDetection extends LinearOpMode {
         visionPortal = builder.build();
 
         // Set confidence threshold for TFOD recognitions, at any time.
-        //tfod.setMinResultConfidence(0.75f);
+        tfod.setMinResultConfidence(0.5f);
 
         // Disable or re-enable the TFOD processor at any time.
         //visionPortal.setProcessorEnabled(tfod, true);
@@ -149,23 +186,23 @@ public class ObjectDetection extends LinearOpMode {
 
     /**
      * Add telemetry about TensorFlow Object Detection (TFOD) recognitions.
-     */
-    private void telemetryTfod() {
-
-        List<Recognition> currentRecognitions = tfod.getRecognitions();
-        telemetry.addData("# Objects Detected", currentRecognitions.size());
-
-        // Step through the list of recognitions and display info for each one.
-        for (Recognition recognition : currentRecognitions) {
-            double x = (recognition.getLeft() + recognition.getRight()) / 2 ;
-            double y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
-
-            telemetry.addData(""," ");
-            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
-            telemetry.addData("- Position", "%.0f / %.0f", x, y);
-            telemetry.addData("- Size", "%.0f x %.0f", recognition.getWidth(), recognition.getHeight());
-        }   // end for() loop
-
-    }   // end method telemetryTfod()
+     //     */
+//    private void telemetryTfod() {
+//
+//        List<Recognition> currentRecognitions = tfod.getRecognitions();
+//        telemetry.addData("# Objects Detected", currentRecognitions.size());
+//
+//        // Step through the list of recognitions and display info for each one.
+//        for (Recognition recognition : currentRecognitions) {
+//            double x = (recognition.getLeft() + recognition.getRight()) / 2 ;
+//            double y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+//
+//            telemetry.addData(""," ");
+//            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
+//            telemetry.addData("- Position", "%.0f / %.0f", x, y);
+//            telemetry.addData("- Size", "%.0f x %.0f", recognition.getWidth(), recognition.getHeight());
+//        }   // end for() loop
+//
+//    }   // end method telemetryTfod()
 
 }   // end class

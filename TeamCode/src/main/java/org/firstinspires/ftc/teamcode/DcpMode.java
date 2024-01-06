@@ -11,7 +11,7 @@ public class DcpMode extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         // region initialize all robot components & classes needed for dcpMode
         HardwareInit rd1 = new HardwareInit();
-        rd1.init(hardwareMap);
+        rd1.init(hardwareMap, false);
 
         ArmController ArmController = new ArmController();
         ChassyController ChassyController = new ChassyController();
@@ -32,6 +32,13 @@ public class DcpMode extends LinearOpMode {
             //DroneLauncher.droneReleaser(gamepad2 , rd1.servoDrone, telemetry);
 
             PixelGabber.pixelGrabber(gamepad2, rd1.pixelGrabber);
+
+            telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
+            telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
+            telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
+            telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
+
+            telemetry.update();
 
             // update all telemetry visual data
             telemetry.update();
