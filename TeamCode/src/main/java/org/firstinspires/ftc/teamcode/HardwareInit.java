@@ -13,6 +13,7 @@ public class HardwareInit {
     public DcMotor armLifterMotor = null;
     public Servo pixelDropperServo = null;
     public Servo servoDrone = null;
+    public DcMotor pixelGrabber = null;
 
     HardwareMap hwMap = null;
 
@@ -24,6 +25,7 @@ public class HardwareInit {
         rearLeftMotor = hwMap.dcMotor.get("rearLeftMotor");
         frontRightMotor = hwMap.dcMotor.get("frontRightMotor");
         rearRightMotor = hwMap.dcMotor.get("rearRightMotor");
+        pixelGrabber = hwMap.dcMotor.get("pixelGrabber");
 
         // specify motors run with encoders
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

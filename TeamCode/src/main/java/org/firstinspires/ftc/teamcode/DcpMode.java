@@ -22,14 +22,16 @@ public class DcpMode extends LinearOpMode {
 
         // running functions while dcpMode is active
         while (opModeIsActive()) {
-            // control the movement of the robot chassis
+            // control the movement of the robot chassis - DONE
             ChassyController.dcpMovement(gamepad1 ,rd1.frontLeftMotor, rd1.rearLeftMotor, rd1.frontRightMotor, rd1.rearRightMotor);
 
             // control the components of the arm
-            ArmController.armLifter(gamepad2 ,rd1.armLifterMotor, telemetry);
-            //ArmController.pixelDropper(pixelDropperServo);
+            ArmController.armLifter(gamepad2 ,rd1.armLifterMotor, telemetry); // -
+            //ArmController.pixelDropper(gamepad2 ,rd1.pixelDropperServo); // -
 
-            //droneLauncher.droneReleaser(gamepad2 ,servoDrone, telemetry);
+            //DroneLauncher.droneReleaser(gamepad2 , rd1.servoDrone, telemetry);
+
+            PixelGabber.pixelGrabber(gamepad2, rd1.pixelGrabber);
 
             // update all telemetry visual data
             telemetry.update();
