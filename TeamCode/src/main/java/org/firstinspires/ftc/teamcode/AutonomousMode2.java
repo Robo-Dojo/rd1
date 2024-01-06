@@ -98,82 +98,58 @@ public class AutonomousMode2 extends LinearOpMode {
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
-            if(objectDetectionResult==1)
-            {
+            if (objectDetectionResult == 1) {
                 //goes to designated line
-                drive(0.2,-600,-1800,-600,-1800);
+                drive(0.2, -600, -1800, -600, -1800);
                 // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
+                drive(0.2, 1200, 0, 1200, 0);
                 // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
+                drive(0.2, -893, -893, -893, -893);
                 // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
+                drive(0.2, -900, -2100, -800, -2100);
                 // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-            }
-            else if(objectDetectionResult==2)
-            {
+                drive(0.2, -1161, -1161, -1161, -1161);
+                for (int i = 0; i < 20; i++) {
+                    rd1.armLifterMotor.setPower(0.4);
+                    sleep(10);
+                }
+                rd1.pixelDropperServo.setPosition(0.5);
+            } else if (objectDetectionResult == 2) {
                 // goes to designated line
-                drive(0.2, -800,-800,-800,-800);
+                drive(0.2, -800, -800, -800, -800);
                 drive(0.2, -500, -500, -500, -500);
                 // go back to backdrop trajectory
-                drive(0.2,360,360,360,360);
+                drive(0.2, 360, 360, 360, 360);
                 // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
+                drive(0.2, -893, -893, -893, -893);
                 // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
+                drive(0.2, -900, -2100, -800, -2100);
                 // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
+                drive(0.2, -1161, -1161, -1161, -1161);
+                for (int i = 0; i < 20; i++) {
+                    rd1.armLifterMotor.setPower(0.4);
+                    sleep(10);
+                }
+                rd1.pixelDropperServo.setPosition(0.5);
 
-            }
-            else
-            {
+            } else {
                 // goes to designated line
-                drive(0.2,-1800,-600,-1800,-600);
+                drive(0.2, -1800, -600, -1800, -600);
                 // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                drive(0.2,360,360,360,360);
+                drive(0.2, 1200, 0, 1200, 0);
+                drive(0.2, 360, 360, 360, 360);
                 // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
+                drive(0.2, -893, -893, -893, -893);
                 // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
+                drive(0.2, -900, -2100, -800, -2100);
                 // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
+                drive(0.2, -1161, -1161, -1161, -1161);
+                for (int i = 0; i < 20; i++) {
+                    rd1.armLifterMotor.setPower(0.4);
+                    sleep(10);
+                }
+                rd1.pixelDropperServo.setPosition(0.5);
             }
-
-
-
-
-
-
-
-
-
-            //inaintat la zona cu linii
-            //Asta e buna pentru Linia 1
-            drive(0.2,-600,-1800,-600,-1800);
-
-            //segment 2 - 1304
-            //Astea 2 bune pentru linia 2
-            //drive(0.2, -800,-800,-800,-800);
-            //drive(0.2, -500, -500, -500, -500);
-
-            //pozitie 3
-
-
-            //intoarcere la pozitia 0, dar putin mai in fata sa intram printre bari
-            //Astea 2 sunt bune pt linia 1
-            drive(0.2, 1200,0,1200,0);
-
-            //intors la start
-            drive(0.2,360,360,360,360);
-
-            //mergem spre backboard
-            drive(0.7,-3214,3214,3214,-3214);
-
-            sleep(100000);
-            idle();
-
         }
     }
 }

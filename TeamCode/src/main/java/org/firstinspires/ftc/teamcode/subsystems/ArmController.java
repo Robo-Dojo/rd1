@@ -32,10 +32,10 @@ public class ArmController {
     {
         if(_gamepad2.y){
             // set pixelDropper in position for dropping the pixels
-            pixelDropperServo.setPosition(10); // TODO: value to be adapted
+            pixelDropperServo.setPosition(0.6); // TODO: value to be adapted
         } else if(_gamepad2.a){
             // set pixelDropper in position for getting the pixels
-            pixelDropperServo.setPosition(-10); // TODO: value to be adapted
+            pixelDropperServo.setPosition(-0.6); // TODO: value to be adapted
         }
 
     }

@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.subsystems.ArmController;
 import org.firstinspires.ftc.teamcode.subsystems.ObjectDetection;
 //endregion
 
@@ -115,6 +116,11 @@ public class AutonomousMode extends LinearOpMode {
                 drive(0.2,-900,-2100,-800,-2100);
                 // drive to backdrop
                 drive(0.2,-1161,-1161,-1161,-1161);
+                for(int i=0; i<20; i++) {
+                    rd1.armLifterMotor.setPower(0.4);
+                    sleep(10);
+                }
+                rd1.pixelDropperServo.setPosition(0.5);
             }
             else if(objectDetectionResult == 2){
                 // goes to designated line
@@ -130,6 +136,11 @@ public class AutonomousMode extends LinearOpMode {
                 drive(0.2,-900,-2100,-800,-2100);
                 // drive to backdrop
                 drive(0.2,-1161,-1161,-1161,-1161);
+                for(int i=0; i<20; i++) {
+                    rd1.armLifterMotor.setPower(0.4);
+                    sleep(10);
+                }
+                rd1.pixelDropperServo.setPosition(0.5);
             }
             else{
                 // goes to designated line
@@ -145,81 +156,13 @@ public class AutonomousMode extends LinearOpMode {
                 drive(0.2,-900,-2100,-800,-2100);
                 // drive to backdrop
                 drive(0.2,-1161,-1161,-1161,-1161);
+                for(int i=0; i<20; i++) {
+                    rd1.armLifterMotor.setPower(0.4);
+                    sleep(10);
+                }
+                rd1.pixelDropperServo.setPosition(0.5);
             }
 
-
-
-
-            //autonomus 2 (n-am idee unde sa o pun)
-            if(objectDetectionResult==1)
-            {
-                //goes to designated line
-                drive(0.2,-600,-1800,-600,-1800);
-                // bo back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                // go to backdrop playing field
-                drive(0.7,-3214,3214,3214,-3214);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-            }
-            else if(objectDetectionResult==2)
-            {
-                // goes to designated line
-                drive(0.2, -800,-800,-800,-800);
-                drive(0.2, -500, -500, -500, -500);
-                // go back to backdrop trajectory
-                drive(0.2,360,360,360,360);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-
-            }
-            else
-            {
-                // goes to designated line
-                drive(0.2,-1800,-600,-1800,-600);
-                // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                drive(0.2,360,360,360,360);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-            }
-
-            //inaintat la zona cu linii
-            //Asta e buna pentru Linia 1
-            drive(0.2,-600,-1800,-600,-1800);
-
-            //segment 2 - 1304
-            //Astea 2 bune pentru linia 2
-            //drive(0.2, -800,-800,-800,-800);
-            //drive(0.2, -500, -500, -500, -500);
-
-            //pozitie 3
-
-
-            //intoarcere la pozitia 0, dar putin mai in fata sa intram printre bari
-            //Astea 2 sunt bune pt linia 1
-            drive(0.2, 1200,0,1200,0);
-
-            //intors la start
-            drive(0.2,360,360,360,360);
-
-            //mergem spre backboard
-            drive(0.7,-3214,3214,3214,-3214);
-
-            sleep(100000);
-            idle();
 
         }
     }
