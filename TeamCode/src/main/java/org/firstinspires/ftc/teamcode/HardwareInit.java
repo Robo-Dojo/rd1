@@ -44,6 +44,13 @@ public class HardwareInit {
             frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             rearLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             rearRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+            frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
         }
 
         //frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);

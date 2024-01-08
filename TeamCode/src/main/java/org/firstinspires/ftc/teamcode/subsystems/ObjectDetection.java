@@ -80,9 +80,9 @@ public class ObjectDetection {
         if (teamPropX == 0) {
             result = 3;
         } else if (teamPropX < partScreenSize) {
-            result = 1;
-        } else {
             result = 2;
+        } else {
+            result = 1;
         }
 
         return result;

@@ -106,61 +106,69 @@ public class AutonomousMode extends LinearOpMode {
                 // goes to designated line
                 drive(0.2,-600,-1800,-600,-1800);
                 // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-                drive(0.7,-3214,3214,3214,-3214);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-                for(int i=0; i<20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
+                drive(0.7, 1200,0,1200,0);
+                drive(0.7,-1700,-1700,-1700,-1700);
+//                // go to backdrop playing field
+                drive(0.7,-3700,3700,3700,-3700);
+//                // set in front of backdrop
+//                drive(0.2, -893,-893,-893,-893);
+//                // rotate robot 90 dgr
+                if(rd1.frontRightMotor.getCurrentPosition() > 1398 || rd1.frontLeftMotor.getCurrentPosition() < -5998 || rd1.rearRightMotor.getCurrentPosition() < -5998 || rd1.rearLeftMotor.getCurrentPosition() > 1398) {
+                    rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    drive(0.7,850,850,850,850);
+                    drive(0.2, 1100,-1100,1100,-1100);
                 }
-                rd1.pixelDropperServo.setPosition(0.5);
+                //drive(0.2,2400,-2400,-2400,2400);
+//                // drive to backdrop
+//                drive(0.2,-1161,-1161,-1161,-1161);
+//                for(int i=0; i<20; i++) {
+//                    rd1.armLifterMotor.setPower(0.4);
+//                    sleep(10);
+//                }
+//                rd1.pixelDropperServo.setPosition(0.5);
             }
             else if(objectDetectionResult == 2){
                 // goes to designated line
                 drive(0.2, -800,-800,-800,-800);
                 drive(0.2, -500, -500, -500, -500);
                 // go back to backdrop trajectory
-                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-                drive(0.7,-3214,3214,3214,-3214);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-                for(int i=0; i<20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
-                }
-                rd1.pixelDropperServo.setPosition(0.5);
+//                drive(0.2,360,360,360,360);
+//                // go to backdrop playing field
+//                drive(0.7,-3214,3214,3214,-3214);
+//                // set in front of backdrop
+//                drive(0.2, -893,-893,-893,-893);
+//                // rotate robot 90 dgr
+//                drive(0.2,-900,-2100,-800,-2100);
+//                // drive to backdrop
+//                drive(0.2,-1161,-1161,-1161,-1161);
+//                for(int i=0; i<20; i++) {
+//                    rd1.armLifterMotor.setPower(0.4);
+//                    sleep(10);
+//                }
+//                rd1.pixelDropperServo.setPosition(0.5);
             }
             else{
                 // goes to designated line
-                drive(0.2,-1800,-600,-1800,-600);
-                // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                drive(0.2,360,360,360,360);
+//                drive(0.2,-1800,-600,-1800,-600);
+//                // go back to backdrop trajectory
+//                drive(0.2, 1200,0,1200,0);
+//                drive(0.2,360,360,360,360);
                 // go to backdrop playing field
-                drive(0.7,-3214,3214,3214,-3214);
-                // set in front of backdrop
-                drive(0.2, -893,-893,-893,-893);
-                // rotate robot 90 dgr
-                drive(0.2,-900,-2100,-800,-2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-                for(int i=0; i<20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
-                }
-                rd1.pixelDropperServo.setPosition(0.5);
+//                drive(0.7,-3214,3214,3214,-3214);
+//                // set in front of backdrop
+//                drive(0.2, -893,-893,-893,-893);
+//                // rotate robot 90 dgr
+//                drive(0.2,-900,-2100,-800,-2100);
+//                // drive to backdrop
+//                drive(0.2,-1161,-1161,-1161,-1161);
+//                for(int i=0; i<20; i++) {
+//                    rd1.armLifterMotor.setPower(0.4);
+//                    sleep(10);
+//                }
+//                rd1.pixelDropperServo.setPosition(0.5);
             }
 
 
