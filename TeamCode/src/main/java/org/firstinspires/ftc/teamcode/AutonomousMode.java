@@ -37,12 +37,6 @@ public class AutonomousMode extends LinearOpMode {
             rearRightTarget = rd1.rearRightMotor.getCurrentPosition() + rearRightTicks;
             rearLeftTarget = rd1.rearLeftMotor.getCurrentPosition() + rearLeftTicks;
 
-            // Create target positions
-//            frontRightTarget += frontRightTicks;
-//            frontLeftTarget += frontLeftTicks;
-//            rearRightTarget += rearRightTicks;
-//            rearLeftTarget += rearLeftTicks;
-
             // set target position
             rd1.frontRightMotor.setTargetPosition(frontLeftTarget);
             rd1.frontLeftMotor.setTargetPosition(frontRightTarget);
@@ -67,10 +61,10 @@ public class AutonomousMode extends LinearOpMode {
             }
 
             // set motor power back to 0
-//            rd1.frontRightMotor.setPower(0);
-//            rd1.frontLeftMotor.setPower(0);
-//            rd1.rearRightMotor.setPower(0);
-//            rd1.rearLeftMotor.setPower(0);
+            rd1.frontRightMotor.setPower(0);
+            rd1.frontLeftMotor.setPower(0);
+            rd1.rearRightMotor.setPower(0);
+            rd1.rearLeftMotor.setPower(0);
 
             telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
             telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
@@ -101,18 +95,24 @@ public class AutonomousMode extends LinearOpMode {
             int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
-
+            objectDetectionResult=1;
             if(objectDetectionResult == 1){
                 // goes to designated line
                 drive(0.2,-600,-1800,-600,-1800);
                 // go back to backdrop trajectory
                 drive(0.7, 1200,0,1200,0);
-                drive(0.7,-1700,-1700,-1700,-1700);
-//                // go to backdrop playing field
-                drive(0.7,-3700,3700,3700,-3700);
-//                // set in front of backdrop
-//                drive(0.2, -893,-893,-893,-893);
-//                // rotate robot 90 dgr
+                drive(0.7,-1600,-1600,-1600,-1600);
+                //rotate robot 90 dgr
+                drive(0.2, 1100,-1100,1100,-1100);
+                // go to backdrop playing field
+                rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                drive(0.7,-3000,-3000,-3000,-3000);
+                //align to backdrop
+                // drive(0.7,850,850,850,850);
+                /*// rotate robot 90 dgr and align to backdrop trajectory
                 if(rd1.frontRightMotor.getCurrentPosition() > 1398 || rd1.frontLeftMotor.getCurrentPosition() < -5998 || rd1.rearRightMotor.getCurrentPosition() < -5998 || rd1.rearLeftMotor.getCurrentPosition() > 1398) {
                     rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -120,57 +120,22 @@ public class AutonomousMode extends LinearOpMode {
                     rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     drive(0.7,850,850,850,850);
                     drive(0.2, 1100,-1100,1100,-1100);
-                }
-                //drive(0.2,2400,-2400,-2400,2400);
-//                // drive to backdrop
-//                drive(0.2,-1161,-1161,-1161,-1161);
-//                for(int i=0; i<20; i++) {
-//                    rd1.armLifterMotor.setPower(0.4);
-//                    sleep(10);
-//                }
-//                rd1.pixelDropperServo.setPosition(0.5);
+                }*/
             }
+            /*
             else if(objectDetectionResult == 2){
                 // goes to designated line
                 drive(0.2, -800,-800,-800,-800);
                 drive(0.2, -500, -500, -500, -500);
-                // go back to backdrop trajectory
-//                drive(0.2,360,360,360,360);
-//                // go to backdrop playing field
-//                drive(0.7,-3214,3214,3214,-3214);
-//                // set in front of backdrop
-//                drive(0.2, -893,-893,-893,-893);
-//                // rotate robot 90 dgr
-//                drive(0.2,-900,-2100,-800,-2100);
-//                // drive to backdrop
-//                drive(0.2,-1161,-1161,-1161,-1161);
-//                for(int i=0; i<20; i++) {
-//                    rd1.armLifterMotor.setPower(0.4);
-//                    sleep(10);
-//                }
-//                rd1.pixelDropperServo.setPosition(0.5);
             }
             else{
                 // goes to designated line
-//                drive(0.2,-1800,-600,-1800,-600);
-//                // go back to backdrop trajectory
-//                drive(0.2, 1200,0,1200,0);
-//                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-//                drive(0.7,-3214,3214,3214,-3214);
-//                // set in front of backdrop
-//                drive(0.2, -893,-893,-893,-893);
-//                // rotate robot 90 dgr
-//                drive(0.2,-900,-2100,-800,-2100);
-//                // drive to backdrop
-//                drive(0.2,-1161,-1161,-1161,-1161);
-//                for(int i=0; i<20; i++) {
-//                    rd1.armLifterMotor.setPower(0.4);
-//                    sleep(10);
-//                }
-//                rd1.pixelDropperServo.setPosition(0.5);
+                drive(0.2,-1800,-600,-1800,-600);
+                // go back to backdrop trajectory
+                drive(0.2, 1200,0,1200,0);
+                drive(0.2,360,360,360,360);
             }
-
+            */
 
         }
     }

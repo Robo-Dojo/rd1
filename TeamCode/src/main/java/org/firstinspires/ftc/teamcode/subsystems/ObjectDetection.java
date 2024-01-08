@@ -84,6 +84,7 @@ public class ObjectDetection {
         } else {
             result = 1;
         }
+        telemetry.addData("result", result);
 
         return result;
     }
