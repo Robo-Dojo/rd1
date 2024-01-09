@@ -11,9 +11,9 @@ public class ChassyController {
     {
         // read values gamepad 1
         double accelerator = (0.3 + _gamepad1.right_trigger);
-        double gp1Y = -(_gamepad1.left_stick_y*accelerator);
-        double gp1X = -(_gamepad1.left_stick_x*accelerator);
-        double gp1RotationX = _gamepad1.right_stick_x*0.6;
+        double gp1Y = -(_gamepad1.right_stick_y*accelerator);
+        double gp1X = -(_gamepad1.right_stick_x*accelerator);
+        double gp1RotationX = _gamepad1.left_stick_x*0.6;
 
         // calculate engines power
         double denominator = Math.max(Math.abs(gp1Y) + Math.abs(gp1X) + Math.abs(gp1RotationX), 1);

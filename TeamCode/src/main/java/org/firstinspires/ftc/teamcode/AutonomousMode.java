@@ -98,22 +98,29 @@ public class AutonomousMode extends LinearOpMode {
             objectDetectionResult=1;
             if(objectDetectionResult == 1){
                 // goes to designated line
-                drive(0.2,-600,-1800,-600,-1800);
+                drive(0.7,-600,-1800,-600,-1800);
                 // go back to backdrop trajectory
                 drive(0.7, 1200,0,1200,0);
-                drive(0.7,-1600,-1600,-1600,-1600);
+                drive(0.7,-1640,-1640,-1640,-1640);
                 //rotate robot 90 dgr
-                drive(0.2, 1100,-1100,1100,-1100);
-                // go to backdrop playing field
+                drive(0.7, 1130,-1130,1130,-1130);
+                //reset motor ticks
                 rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                drive(0.7,-3000,-3000,-3000,-3000);
-                //align to backdrop
-                // drive(0.7,850,850,850,850);
-                /*// rotate robot 90 dgr and align to backdrop trajectory
-                if(rd1.frontRightMotor.getCurrentPosition() > 1398 || rd1.frontLeftMotor.getCurrentPosition() < -5998 || rd1.rearRightMotor.getCurrentPosition() < -5998 || rd1.rearLeftMotor.getCurrentPosition() > 1398) {
+                // go to backdrop playing field
+                drive(0.7,-3250,-3250,-3250,-3250);
+                // align robot to backdrop trajectory
+                drive(0.7, -1200,1200,1200,-1200);
+                //reset motor ticks
+                rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                //place in front of backdrop
+                drive(0.2,-900,-900,-900,-900);
+                /*if(rd1.frontRightMotor.getCurrentPosition() > 1398 || rd1.frontLeftMotor.getCurrentPosition() < -5998 || rd1.rearRightMotor.getCurrentPosition() < -5998 || rd1.rearLeftMotor.getCurrentPosition() > 1398) {
                     rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
