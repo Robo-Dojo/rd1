@@ -13,19 +13,20 @@ public class ArmController {
     public void armLifter(Gamepad _gamepad2, DcMotor armMotor, Telemetry telemetry)
     {
         // get joystick params
-        double armLifter= -_gamepad2.right_stick_y*0.5;
+        boolean armLifter= _gamepad2.right_bumper;
+        boolean armDropper= _gamepad2.left_bumper;
 
         // telemetry code for dev purpose
-        if(armLifter<0) {
-            telemetry.addData("dropping",armLifter);
-        } else if(armLifter==0){
-            telemetry.addData("static",armLifter);
-        } else if(armLifter>0){
-            telemetry.addData("lifting",armLifter);
+        if(armDropper) {
+            armMotor.setTargetPosition(0);
+            armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            armMotor.setPower(0.75);
+        } else if(armLifter){
+            armMotor.setTargetPosition(2393);
+            armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            armMotor.setPower(0.75);
         }
 
-        //region choose lifter action
-        armMotor.setPower(armLifter);
     }
 
     public void pixelDropper(Gamepad _gamepad2 ,Servo pixelDropperServo)
