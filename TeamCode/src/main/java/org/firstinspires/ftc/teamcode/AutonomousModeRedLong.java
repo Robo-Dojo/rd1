@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.subsystems.ObjectDetection;
 //endregion
 
-@Autonomous(name = "TestAutonom2")
-public class AutonomousMode2 extends LinearOpMode {
-    HardwareInit rd1 = new HardwareInit();
+@Autonomous(name = "AutonomousRedLong")
+public class AutonomousModeRedLong extends LinearOpMode {
+    static HardwareInit rd1 = new HardwareInit();
     ObjectDetection objDet = new ObjectDetection();
 
     int frontRightTarget = 0;
@@ -17,12 +17,14 @@ public class AutonomousMode2 extends LinearOpMode {
     int rearLeftTarget = 0;
     int rearRightTarget = 0;
 
+
     // Drive function with 3 parameters
     private void drive(double power, int frontRightTicks, int frontLeftTicks, int rearRightTicks, int rearLeftTicks) {
         telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
         telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
         telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
         telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
+        telemetry.addData("ALM= ", rd1.armLifterMotor.getCurrentPosition());
 
         telemetry.update();
 
@@ -32,12 +34,6 @@ public class AutonomousMode2 extends LinearOpMode {
             frontLeftTarget = rd1.frontLeftMotor.getCurrentPosition() + frontLeftTicks;
             rearRightTarget = rd1.rearRightMotor.getCurrentPosition() + rearRightTicks;
             rearLeftTarget = rd1.rearLeftMotor.getCurrentPosition() + rearLeftTicks;
-
-            // Create target positions
-//            frontRightTarget += frontRightTicks;
-//            frontLeftTarget += frontLeftTicks;
-//            rearRightTarget += rearRightTicks;
-//            rearLeftTarget += rearLeftTicks;
 
             // set target position
             rd1.frontRightMotor.setTargetPosition(frontLeftTarget);
@@ -63,10 +59,10 @@ public class AutonomousMode2 extends LinearOpMode {
             }
 
             // set motor power back to 0
-//            rd1.frontRightMotor.setPower(0);
-//            rd1.frontLeftMotor.setPower(0);
-//            rd1.rearRightMotor.setPower(0);
-//            rd1.rearLeftMotor.setPower(0);
+            rd1.frontRightMotor.setPower(0);
+            rd1.frontLeftMotor.setPower(0);
+            rd1.rearRightMotor.setPower(0);
+            rd1.rearLeftMotor.setPower(0);
 
             telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
             telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
@@ -76,6 +72,13 @@ public class AutonomousMode2 extends LinearOpMode {
             telemetry.update();
             idle();
         }
+    }
+
+    private static void resetEncoders(){
+        rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     @Override
@@ -97,59 +100,76 @@ public class AutonomousMode2 extends LinearOpMode {
             int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
-
-            if (objectDetectionResult == 1) {
-                //goes to designated line
-                drive(0.2, -600, -1800, -600, -1800);
-                // go back to backdrop trajectory
-                drive(0.2, 1200, 0, 1200, 0);
-                // set in front of backdrop
-                drive(0.2, -893, -893, -893, -893);
-                // rotate robot 90 dgr
-                drive(0.2, -900, -2100, -800, -2100);
-                // drive to backdrop
-                drive(0.2, -1161, -1161, -1161, -1161);
-                for (int i = 0; i < 20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
-                }
-                rd1.pixelDropperServo.setPosition(0.5);
-            } else if (objectDetectionResult == 2) {
+            objectDetectionResult=2;
+            //Acest segment este full done
+            if(objectDetectionResult == 1){
                 // goes to designated line
-                drive(0.2, -800, -800, -800, -800);
-                drive(0.2, -500, -500, -500, -500);
+                drive(0.7,-600,-1800,-600,-1800);
                 // go back to backdrop trajectory
-                drive(0.2, 360, 360, 360, 360);
-                // set in front of backdrop
-                drive(0.2, -893, -893, -893, -893);
-                // rotate robot 90 dgr
-                drive(0.2, -900, -2100, -800, -2100);
-                // drive to backdrop
-                drive(0.2, -1161, -1161, -1161, -1161);
-                for (int i = 0; i < 20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
-                }
-                rd1.pixelDropperServo.setPosition(0.5);
-
-            } else {
-                // goes to designated line
-                drive(0.2, -1800, -600, -1800, -600);
-                // go back to backdrop trajectory
-                drive(0.2, 1200, 0, 1200, 0);
-                drive(0.2, 360, 360, 360, 360);
-                // set in front of backdrop
-                drive(0.2, -893, -893, -893, -893);
-                // rotate robot 90 dgr
-                drive(0.2, -900, -2100, -800, -2100);
-                // drive to backdrop
-                drive(0.2, -1161, -1161, -1161, -1161);
-                for (int i = 0; i < 20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
-                }
-                rd1.pixelDropperServo.setPosition(0.5);
+                drive(0.7, 1200,0,1200,0);
+                drive(0.7,-1640,-1640,-1640,-1640);
+                //rotate robot 90 dgr
+                drive(0.7, 1115,-1115,1115,-1115);
+                //reset motor ticks
+                resetEncoders();
+                // go to backdrop playing field
+                drive(0.7,-3250,-3250,-3250,-3250);
+                // align robot to backdrop trajectory
+                drive(0.7, -1115,1115,1115,-1115);
+                //reset motor ticks
+                resetEncoders();
+                //place in front of backdrop
+                drive(0.2,-930,-930,-930,-930);
+                // extend vipers
+                rd1.armLifterMotor.setTargetPosition(2391);
+                rd1.armLifterMotor.setPower(0.75);
+                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // drop the pixel
+                rd1.pixelDropperServo.setPosition(0.6);
             }
+
+            else if(objectDetectionResult == 2){
+                // goes to designated line
+                drive(0.2, -900,-900,-900,-900);
+                drive(0.2, 100, 100, 100, 100);
+                // goes under bridge
+                drive(0.7, 1115,-1115,-1115,1115);
+                // goes under gate
+                drive(0.7,-1440,-1440,-1440,-1440);
+                // rotate 90 degrees
+                drive(0.7, -1115,1115,-1115,1115);
+                // goes to backboard
+                drive(0.7,-1000,-1000,-1000,-1000);
+                drive(0.2,-200,-200,-200,-200);
+            }
+
+            else if(objectDetectionResult == 3){
+                // goes to designated line
+                drive(0.7,-1800,-600,-1800,-600);
+                // go back to backdrop trajectory
+                drive(0.7, 1200,0,1200,0);
+                drive(0.7,-1640,-1640,-1640,-1640);
+                //rotate robot 90 dgr
+                drive(0.7, 1115,-1115,1115,-1115);
+                //reset motor ticks
+                resetEncoders();
+                // go to backdrop playing field
+                drive(0.7,-3250,-3250,-3250,-3250);
+                // align robot to backdrop trajectory
+                drive(0.7, -1115,1115,1115,-1115);
+                //reset motor ticks
+                resetEncoders();
+                //place in front of backdrop
+                drive(0.2,-930,-930,-930,-930);
+                // extend vipers
+                rd1.armLifterMotor.setTargetPosition(2391);
+                rd1.armLifterMotor.setPower(0.75);
+                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // drop the pixel
+                rd1.pixelDropperServo.setPosition(0.6);
+            }
+
+
         }
     }
 }

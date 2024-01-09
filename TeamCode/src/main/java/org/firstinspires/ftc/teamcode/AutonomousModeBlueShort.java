@@ -1,18 +1,15 @@
 //region imports
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.ObjectDetection;
 //endregion
 
-@Autonomous(name = "TestAutonom3")
-public class AutonomusMode3 extends LinearOpMode {
-    HardwareInit rd1 = new HardwareInit();
+@Autonomous(name = "AutonomousBlueShort")
+public class AutonomousModeBlueShort extends LinearOpMode {
+    static HardwareInit rd1 = new HardwareInit();
     ObjectDetection objDet = new ObjectDetection();
 
     int frontRightTarget = 0;
@@ -81,6 +78,13 @@ public class AutonomusMode3 extends LinearOpMode {
         }
     }
 
+    private static void resetEncoders(){
+        rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
     @Override
     public void runOpMode() {
         rd1.init(hardwareMap, true);
@@ -101,67 +105,52 @@ public class AutonomusMode3 extends LinearOpMode {
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
+            objectDetectionResult=1;
             if(objectDetectionResult == 1){
                 // goes to designated line
-                drive(0.2,-600,-1800,-600,-1800);
+                drive(0.7,-600,-1800,-600,-1800);
                 // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-                drive(0.7,+3214,-3214,-3214,+3214);
-                // set in front of backdrop
-                drive(0.2, +893,+893,+893,+893);
-                // rotate robot 90 dgr
-                drive(0.2,+900,+2100,+800,+2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-                for(int i=0; i<20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
-                }
-                rd1.pixelDropperServo.setPosition(0.5);
+                drive(0.7, 1200,0,1200,0);
+                drive(0.7,-1640,-1640,-1640,-1640);
+                //rotate robot 90 dgr
+                drive(0.7, -1115,1115,-1115,1115);
+                //reset motor ticks
+                resetEncoders();
+                //place in front of backdrop TODO: change values
+                drive(0.2,-1000,-1000,-1000,-1000);
+                // extend vipers
+                rd1.armLifterMotor.setTargetPosition(2391);
+                rd1.armLifterMotor.setPower(0.75);
+                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // drop the pixel
+                rd1.pixelDropperServo.setPosition(0.6);
             }
+
             else if(objectDetectionResult == 2){
                 // goes to designated line
                 drive(0.2, -800,-800,-800,-800);
                 drive(0.2, -500, -500, -500, -500);
-                // go back to backdrop trajectory
-                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-                drive(0.7,+3214,-3214,-3214,+3214);
-                // set in front of backdrop
-                drive(0.2, +893,+893,+893,+893);
-                // rotate robot 90 dgr
-                drive(0.2,+900,+2100,+800,+2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-                for(int i=0; i<20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
-                }
-                rd1.pixelDropperServo.setPosition(0.5);
-            }
-            else{
-                // goes to designated line
-                drive(0.2,-1800,-600,-1800,-600);
-                // go back to backdrop trajectory
-                drive(0.2, 1200,0,1200,0);
-                drive(0.2,360,360,360,360);
-                // go to backdrop playing field
-                drive(0.7,+3214,-3214,-3214,+3214);
-                // set in front of backdrop
-                drive(0.2, +893,+893,+893,+893);
-                // rotate robot 90 dgr
-                drive(0.2,+900,+2100,+800,+2100);
-                // drive to backdrop
-                drive(0.2,-1161,-1161,-1161,-1161);
-                for(int i=0; i<20; i++) {
-                    rd1.armLifterMotor.setPower(0.4);
-                    sleep(10);
-                }
-                rd1.pixelDropperServo.setPosition(0.5);
             }
 
+            else if(objectDetectionResult == 3){
+                // goes to designated line
+                drive(0.7,-1800,-600,-1800,-600);
+                // go back to backdrop trajectory
+                drive(0.7, 1200,0,1200,0);
+                drive(0.7,-1640,-1640,-1640,-1640);
+                //rotate robot 90 dgr
+                drive(0.7, 1115,-1115,1115,-1115);
+                //reset motor ticks
+                resetEncoders();
+                //place in front of backdrop TODO: change values
+                drive(0.2,-1000,-1000,-1000,-1000);
+                // extend vipers
+                rd1.armLifterMotor.setTargetPosition(2391);
+                rd1.armLifterMotor.setPower(0.75);
+                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // drop the pixel
+                rd1.pixelDropperServo.setPosition(0.6);
+            }
         }
     }
 }

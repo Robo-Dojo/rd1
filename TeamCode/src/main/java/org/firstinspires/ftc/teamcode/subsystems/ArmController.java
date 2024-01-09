@@ -22,7 +22,7 @@ public class ArmController {
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.75);
         } else if(armLifter){
-            armMotor.setTargetPosition(2393);
+            armMotor.setTargetPosition(2391);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.75);
         }
