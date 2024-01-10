@@ -100,7 +100,12 @@ public class AutonomousModeRedLong extends LinearOpMode {
             int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
-            objectDetectionResult=2;
+
+
+
+
+
+
             //Acest segment este full done
             if(objectDetectionResult == 1){
                 // goes to designated line
@@ -130,7 +135,7 @@ public class AutonomousModeRedLong extends LinearOpMode {
 
             else if(objectDetectionResult == 2){
                 // goes to designated line
-                drive(0.2, -900,-900,-900,-900);
+                drive(0.2, -1300,-1300,-1300,-1300);
                 drive(0.2, 100, 100, 100, 100);
                 // goes under bridge
                 drive(0.7, 1115,-1115,-1115,1115);

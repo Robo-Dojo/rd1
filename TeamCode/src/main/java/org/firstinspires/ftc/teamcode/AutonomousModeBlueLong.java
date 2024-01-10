@@ -105,7 +105,7 @@ public class AutonomousModeBlueLong extends LinearOpMode {
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
-            objectDetectionResult=1;
+
             if(objectDetectionResult == 1){
                 // goes to designated line
                 drive(0.7,-600,-1800,-600,-1800);

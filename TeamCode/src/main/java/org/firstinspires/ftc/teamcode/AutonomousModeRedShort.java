@@ -105,20 +105,24 @@ public class AutonomousModeRedShort extends LinearOpMode {
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
-            objectDetectionResult=1;
-
             if(objectDetectionResult == 1){
                 // goes to designated line
                 drive(0.7,-600,-1800,-600,-1800);
                 // go back to backdrop trajectory
                 drive(0.7, 1200,0,1200,0);
-                drive(0.7,-1640,-1640,-1640,-1640);
                 //rotate robot 90 dgr
                 drive(0.7, 1115,-1115,1115,-1115);
                 //reset motor ticks
                 resetEncoders();
                 //place in front of backdrop TODO: change values
                 drive(0.2,-1000,-1000,-1000,-1000);
+                if(objectDetectionResult == 1) {
+                    drive(0.2, 400,-400,-400,400);
+                } else if (objectDetectionResult == 2) {
+                    drive(0.2, 600,-600,-600,600);
+                } else {
+                    drive(0.2, 750,-750,-750,750);
+                }
                 // extend vipers
                 rd1.armLifterMotor.setTargetPosition(2391);
                 rd1.armLifterMotor.setPower(0.75);
@@ -129,8 +133,10 @@ public class AutonomousModeRedShort extends LinearOpMode {
 
             else if(objectDetectionResult == 2){
                 // goes to designated line
-                drive(0.2, -800,-800,-800,-800);
+                drive(0.7, -800,-800,-800,-800);
                 drive(0.2, -500, -500, -500, -500);
+                drive(0.2, 100,100,100,100);
+
             }
 
             else if(objectDetectionResult==3){

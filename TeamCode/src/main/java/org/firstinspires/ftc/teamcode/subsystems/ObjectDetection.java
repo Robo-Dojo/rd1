@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import android.util.Size;
+
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -63,13 +65,13 @@ public class ObjectDetection {
                     break;
                 }
             }
+            if(teamPropX != 0 || teamPropY != 0) {
+                break;
+            }
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
-            }
-            if(teamPropX != 0 || teamPropY != 0) {
-                break;
             }
         }
 
@@ -85,6 +87,7 @@ public class ObjectDetection {
             result = 1;
         }
         telemetry.addData("result", result);
+        telemetry.update();
 
         return result;
     }
@@ -158,7 +161,8 @@ public class ObjectDetection {
         builder.setCamera(webcam);
 
         // Choose a camera resolution. Not all cameras support all resolutions.
-        //builder.setCameraResolution(new Size(640, 480));
+        builder.setCameraResolution(new Size(640, 480));
+
 
         // Enable the RC preview (LiveView).  Set "false" to omit camera monitoring.
         //builder.enableLiveView(true);
