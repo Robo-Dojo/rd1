@@ -112,7 +112,7 @@ public class AutonomousModeRedShort extends LinearOpMode {
                 //align to not hit the truss
                 drive(0.7, 400,400,400,400);
                 //rotate robot 90 dgr
-                drive(0.7, 1110,-1110,1110,-1110);
+                drive(0.7, -1110,1110,-1110,1110);
                 resetEncoders();
                 //go on track
                 drive(0.7,-1100,-1100,-1100,-1100);
@@ -159,7 +159,7 @@ public class AutonomousModeRedShort extends LinearOpMode {
 
             else if(objectDetectionResult==3){
                 // goes to designated line
-                drive(0.7,-1800,-600,-1800,-600);
+                drive(0.65,-1800,-600,-1800,-600);
                 // go back to backdrop trajectory
                 drive(0.7, 0,1200,0,1200);
                 //align to not hit the truss

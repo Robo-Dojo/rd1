@@ -103,7 +103,7 @@ public class AutonomousModeRedLong extends LinearOpMode {
 
 
 
-
+            objectDetectionResult = 3;
 
 
             //Acest segment este full done
@@ -124,7 +124,7 @@ public class AutonomousModeRedLong extends LinearOpMode {
                 //reset motor ticks
                 resetEncoders();
                 //place in front of backdrop
-                drive(0.2,-930,-930,-930,-930);
+                drive(0.2,-975,-975,-975,-975);
                 // extend vipers
                 rd1.armLifterMotor.setTargetPosition(2391);
                 rd1.armLifterMotor.setPower(0.75);
@@ -135,16 +135,15 @@ public class AutonomousModeRedLong extends LinearOpMode {
 
             else if(objectDetectionResult == 2){
                 // goes to designated line
-                drive(0.2, -1300,-1300,-1300,-1300);
-                drive(0.2, 100, 100, 100, 100);
-                // goes under bridge
-                drive(0.7, 1115,-1115,-1115,1115);
+                drive(0.65, -800,-800,-800,-800);
+                drive(0.3, -500,-500,-500,-500);
+                drive(0.2, 167, 167, 167, 167);
+                //rotate 90 dgr
+                drive(0.7, 1075,-1075,1075,-1075);
+                resetEncoders();
                 // goes under gate
-                drive(0.7,-1440,-1440,-1440,-1440);
-                // rotate 90 degrees
-                drive(0.7, -1115,1115,-1115,1115);
+                drive(0.7,-3900,-3900,-3900,-3900);
                 // goes to backboard
-                drive(0.7,-1000,-1000,-1000,-1000);
                 drive(0.2,-200,-200,-200,-200);
             }
 
@@ -152,20 +151,26 @@ public class AutonomousModeRedLong extends LinearOpMode {
                 // goes to designated line
                 drive(0.7,-1800,-600,-1800,-600);
                 // go back to backdrop trajectory
-                drive(0.7, 1200,0,1200,0);
-                drive(0.7,-1640,-1640,-1640,-1640);
+                drive(0.7, 0,1200,0,1200);
+                // align to not hit the truss
+                drive(0.7, -550,-550,-550,-550);
+                resetEncoders();
                 //rotate robot 90 dgr
-                drive(0.7, 1115,-1115,1115,-1115);
+                drive(0.7, 1075,-1075,1075,-1075);
                 //reset motor ticks
                 resetEncoders();
                 // go to backdrop playing field
-                drive(0.7,-3250,-3250,-3250,-3250);
-                // align robot to backdrop trajectory
-                drive(0.7, -1115,1115,1115,-1115);
+                drive(0.7,-3500,-3500,-3500,-3500);
+
+                //glide to align with backdrop
+                drive(0.7,-200,200,200,-200);
+
+                // go to backdrop playing field
+                drive(0.7,-400,-400,-400,-400);
                 //reset motor ticks
                 resetEncoders();
                 //place in front of backdrop
-                drive(0.2,-930,-930,-930,-930);
+                drive(0.2,-200,-200,-200,-200);
                 // extend vipers
                 rd1.armLifterMotor.setTargetPosition(2391);
                 rd1.armLifterMotor.setPower(0.75);

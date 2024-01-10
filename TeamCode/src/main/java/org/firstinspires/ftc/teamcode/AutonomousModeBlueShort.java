@@ -105,19 +105,32 @@ public class AutonomousModeBlueShort extends LinearOpMode {
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
-            objectDetectionResult=1;
             if(objectDetectionResult == 1){
-                // goes to designated line
-                drive(0.7,-600,-1800,-600,-1800);
+
+                drive(0.65,-1800,-600,-1800,-600);
                 // go back to backdrop trajectory
-                drive(0.7, 1200,0,1200,0);
-                drive(0.7,-1640,-1640,-1640,-1640);
-                //rotate robot 90 dgr
-                drive(0.7, -1115,1115,-1115,1115);
-                //reset motor ticks
+                drive(0.7, 0,1200,0,1200);
+
+
+                //align to not hit the truss
+                drive(0.7, 400,400,400,400);
                 resetEncoders();
-                //place in front of backdrop TODO: change values
-                drive(0.2,-1000,-1000,-1000,-1000);
+                //rotate robot 90 dgr
+                drive(0.7, -1100,1100,-1100,1100);
+                resetEncoders();
+                //go on track
+                drive(0.7,-1100,-1100,-1100,-1100);
+                //glide to align with backdrop
+                resetEncoders();
+                drive(0.7,-1100,1100,1100,-1100);
+//
+                //drive to the backdrop
+                resetEncoders();
+                drive(0.7,-800,-800,-800,-800);
+                resetEncoders();
+                //coast slowly to hit the backdrop gently
+                drive(0.2,-100,-100,-100,-100);
+                resetEncoders();
                 // extend vipers
                 rd1.armLifterMotor.setTargetPosition(2391);
                 rd1.armLifterMotor.setPower(0.75);
@@ -128,22 +141,48 @@ public class AutonomousModeBlueShort extends LinearOpMode {
 
             else if(objectDetectionResult == 2){
                 // goes to designated line
-                drive(0.2, -800,-800,-800,-800);
-                drive(0.2, -500, -500, -500, -500);
+                drive(0.7, -800,-800,-800,-800);
+                drive(0.3, -500,-500,-500,-500);
+                drive(0.3,  200,200,200,200);
+                resetEncoders();
+                //rotate robot 90 dgr
+                drive(0.7, -1075,1075,-1075,1075);
+                resetEncoders();
+                //glide to align to backdrop
+
+                //drive to the backdrop
+                drive(0.7,-1900,-1900,-1900,-1900);
+//                drive(0.7, -100,100,100,-100);
+                resetEncoders();
+                //coast slowly to hit the backdrop gently
+                drive(0.2,-100,-100,-100,-100);
+                resetEncoders();
+                // extend vipers
+                rd1.armLifterMotor.setTargetPosition(2391);
+                rd1.armLifterMotor.setPower(0.75);
+                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // drop the pixel
+                rd1.pixelDropperServo.setPosition(0.6);
             }
 
             else if(objectDetectionResult == 3){
+
                 // goes to designated line
-                drive(0.7,-1800,-600,-1800,-600);
+                drive(0.65,-600,-1800,-600,-1800);
                 // go back to backdrop trajectory
                 drive(0.7, 1200,0,1200,0);
-                drive(0.7,-1640,-1640,-1640,-1640);
+
+                //align to not hit the truss
+                drive(0.7, -500,-500,-500,-500);
                 //rotate robot 90 dgr
-                drive(0.7, 1115,-1115,1115,-1115);
-                //reset motor ticks
+                drive(0.7, -1110,1110,-1110,1110);
                 resetEncoders();
-                //place in front of backdrop TODO: change values
-                drive(0.2,-1000,-1000,-1000,-1000);
+                //drive to the backdrop
+                resetEncoders();
+                drive(0.7,-1900,-1900,-1900,-1900);
+                //coast slowly to hit the backdrop gently
+                drive(0.2,-100,-100,-100,-100);
+                resetEncoders();
                 // extend vipers
                 rd1.armLifterMotor.setTargetPosition(2391);
                 rd1.armLifterMotor.setPower(0.75);
