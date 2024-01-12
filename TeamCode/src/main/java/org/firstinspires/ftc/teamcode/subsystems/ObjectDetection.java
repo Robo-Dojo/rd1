@@ -59,6 +59,7 @@ public class ObjectDetection {
         for(int i=0; i < 100; i++) {
             List<Recognition> currentRecognitions = tfod.getRecognitions();
             for (Recognition recognition : currentRecognitions) {
+                telemetry.addData("Detected: ", recognition.getLabel(), " - ", recognition.getConfidence());
                 teamPropX = (recognition.getLeft() + recognition.getRight()) / 2 ;
                 teamPropY = (recognition.getTop()  + recognition.getBottom()) / 2 ;
                 if(teamPropX != 0 || teamPropY != 0) {
@@ -182,7 +183,7 @@ public class ObjectDetection {
         visionPortal = builder.build();
 
         // Set confidence threshold for TFOD recognitions, at any time.
-        tfod.setMinResultConfidence(0.5f);
+        tfod.setMinResultConfidence(0.35f);
 
         // Disable or re-enable the TFOD processor at any time.
         //visionPortal.setProcessorEnabled(tfod, true);

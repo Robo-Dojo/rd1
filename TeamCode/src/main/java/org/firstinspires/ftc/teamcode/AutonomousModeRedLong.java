@@ -98,12 +98,9 @@ public class AutonomousModeRedLong extends LinearOpMode {
             telemetry.update();
 
             int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
+
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
-
-
-
-            objectDetectionResult = 3;
 
 
             //Acest segment este full done
