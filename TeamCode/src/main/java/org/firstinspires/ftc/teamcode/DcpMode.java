@@ -26,7 +26,7 @@ public class DcpMode extends LinearOpMode {
             ChassyController.dcpMovement(gamepad1 ,rd1.frontLeftMotor, rd1.rearLeftMotor, rd1.frontRightMotor, rd1.rearRightMotor);
 
             // control the components of the arm
-            ArmController.armLifter(gamepad2 ,rd1.armLifterMotor, telemetry); // -
+            ArmController.armLifter(gamepad2 ,rd1.armLifterMotor, rd1.pixelDropperServo, telemetry); // -
             ArmController.pixelDropper(gamepad2 ,rd1.pixelDropperServo); // -
 
             DroneLauncher.droneReleaser(gamepad2 , rd1.servoDrone, telemetry);

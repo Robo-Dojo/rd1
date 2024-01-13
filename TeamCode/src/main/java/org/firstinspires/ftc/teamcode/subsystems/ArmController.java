@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 // the class that controls the entire robot arm
 public class ArmController {
 
-    public void armLifter(Gamepad _gamepad2, DcMotor armMotor, Telemetry telemetry)
+    public void armLifter(Gamepad _gamepad2, DcMotor armMotor, Servo pixelDropperServo, Telemetry telemetry)
     {
         // get joystick params
         boolean armLifter= _gamepad2.right_bumper;
@@ -18,6 +18,7 @@ public class ArmController {
 
         // telemetry code for dev purpose
         if(armDropper) {
+            pixelDropperServo.setPosition(0.1);
             armMotor.setTargetPosition(0);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.75);
