@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -126,16 +127,16 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 drive(0.7,-1100,-1100,-1100,-1100);
                 //glide to align with backdrop
                 resetEncoders();
-                drive(0.7,-1100,1100,1100,-1100);
+                //drive(0.7,-1100,1100,1100,-1100);
                 //drive to the backdrop
                 resetEncoders();
-                drive(0.7,-500,-500,-500,-500);
-                drive(0.7,-300,300,300,-300);
+                //drive(0.7,-550,-550,-550,-550);
+                //drive(0.7,-350,350,350,-350);
 
                 resetEncoders();
 
-                extendVipers();
-                idle();
+//                extendVipers();
+//                idle();
             }
 
             else if(objectDetectionResult == 2){
@@ -152,31 +153,32 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 //coast slowly to hit the backdrop gently
                 drive(0.2,-100,-100,-100,-100);
                 drive(0.7,-200,200,200,-200);
+                drive(0.7,800,-800,-800,800);
                 resetEncoders();
                 // extend vipers
-                extendVipers();
-                idle();
+//                extendVipers();
+//                idle();
             }
 
             else if(objectDetectionResult == 3){
                 // goes to designated line
-                drive(0.7,-1800,-600,-1800,-600);
+                drive(0.7,-1700,-600,-1700,-600);
                 // go back to backdrop trajectory
-                drive(0.7, 0,1200,0,1200);
+                drive(0.7, 0,1100,0,1100);
                 //align to not hit the truss
-                drive(0.7, -500,-500,-500,-500);
+                drive(0.7, 500,500,500,500);
                 //rotate robot 90 dgr
-                drive(0.7, -1110,1110,-1110,1110);
+                drive(0.7, -1000,1000,-1000,1000);
                 resetEncoders();
                 //drive to the backdrop
                 resetEncoders();
-                drive(0.7,-1700,-1700,-1700,-1700);
-                drive(0.7,-300,300,300,-300);
+                drive(0.7,-1750,-1750,-1750,-1750);
+                //drive(0.7,-700,700,700,-700);
 
                 resetEncoders();
                 // extend vipers
-                extendVipers();
-                idle();
+//                extendVipers();
+//                idle();
             }
         }
     }
@@ -185,10 +187,12 @@ public class AutonomousModeBlueShort extends LinearOpMode {
         rd1.armLifterMotor.setTargetPosition(2100); // 2391
         telemetry.addData("Target pos set ", rd1.armLifterMotor.getTargetPosition());
 
-        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        telemetry.addData("Set mode ", rd1.armLifterMotor.getMode());
         rd1.armLifterMotor.setPower(0.75);
         telemetry.addData("Set power ", rd1.armLifterMotor.getPower());
+
+        rd1.armLifterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         // drop the pixel
         rd1.pixelDropperServo.setPosition(0.68);
         telemetry.addData("Set pixel drop pos", rd1.pixelDropperServo.getPosition());

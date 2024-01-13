@@ -18,11 +18,11 @@ public class ArmController {
 
         // telemetry code for dev purpose
         if(armDropper) {
-            armMotor.setTargetPosition(10);
+            armMotor.setTargetPosition(-10);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.75);
         } else if(armLifter){
-            armMotor.setTargetPosition(2100); // 2391
+            armMotor.setTargetPosition(2000); // 2391
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.75);
         }

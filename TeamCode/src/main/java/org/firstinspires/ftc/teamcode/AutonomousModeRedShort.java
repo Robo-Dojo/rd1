@@ -122,18 +122,18 @@ public class AutonomousModeRedShort extends LinearOpMode {
                 drive(0.7, 1200,-1200,1200,-1200);
                 resetEncoders();
                 //go on track
-                drive(0.7,-1100,-1100,-1100,-1100);
+                drive(0.7,-1600,-1600,-1600,-1600);
                 //glide to align with backdrop
-                resetEncoders();
-                drive(0.7,1100,-1100,-1100,1100);
-                //drive to the backdrop
-                resetEncoders();
-                drive(0.7,-350,-350,-350,-350);
-                drive(0.7,300,-300,-300,300);
+//                resetEncoders();
+//                drive(0.7,1100,-1100,-1100,1100);
+//                //drive to the backdrop
+//                resetEncoders();
+//                drive(0.7,-350,-350,-350,-350);
+//                drive(0.7,300,-300,-300,300);
 
                 resetEncoders();
 
-                extendVipers();
+//                extendVipers();
 
             }
 
@@ -150,11 +150,11 @@ public class AutonomousModeRedShort extends LinearOpMode {
                 resetEncoders();
                 drive(0.7,-1600,-1600,-1600,-1600);
                 //coast slowly to hit the backdrop gently
-                drive(0.2,-100,-100,-100,-100);
-                drive(0.7,200,-200,-200,200);
+                //drive(0.2,-100,-100,-100,-100);
+                drive(0.7,800,-800,-800,800);
                 resetEncoders();
                 // extend vipers
-                extendVipers();
+//                extendVipers();
 
             }
             // left
@@ -171,11 +171,11 @@ public class AutonomousModeRedShort extends LinearOpMode {
                 //drive to the backdrop
                 resetEncoders();
                 drive(0.7,-1700,-1700,-1700,-1700);
-                drive(0.7,-300,300,300,-300);
+                drive(0.7,-800,800,800,-800);
 
                 resetEncoders();
                 // extend vipers
-                extendVipers();
+//                extendVipers();
 
             }
         }
