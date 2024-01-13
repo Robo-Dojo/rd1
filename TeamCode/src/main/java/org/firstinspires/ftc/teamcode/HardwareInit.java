@@ -38,6 +38,7 @@ public class HardwareInit {
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armLifterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         if (!isAutonom) {
             // specify motors run with encoders

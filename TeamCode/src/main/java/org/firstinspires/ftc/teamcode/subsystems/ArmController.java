@@ -40,4 +40,21 @@ public class ArmController {
         }
 
     }
+
+    public void armLifterAuto(DcMotor armMotor, Telemetry telemetry)
+    {
+
+            armMotor.setTargetPosition(2000); // 2391
+            armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            armMotor.setPower(0.75);
+
+    }
+
+    public void pixelDropperAuto(Servo pixelDropperServo)
+    {
+            // set pixelDropper in position for dropping the pixels
+            pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
+
+
+    }
 }

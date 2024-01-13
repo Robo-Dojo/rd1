@@ -5,12 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.teamcode.subsystems.ArmController;
 import org.firstinspires.ftc.teamcode.subsystems.ObjectDetection;
 //endregion
 
 @Autonomous(name = "AutonomousBlueLong")
 public class AutonomousModeBlueLong extends LinearOpMode {
     HardwareInit rd1 = null;
+    ArmController ArmController = new ArmController();
     ObjectDetection objDet = new ObjectDetection();
 
     int frontRightTarget = 0;
@@ -173,12 +175,14 @@ public class AutonomousModeBlueLong extends LinearOpMode {
     }
 
     private void extendVipers() {
-        // extend vipers
-        rd1.armLifterMotor.setTargetPosition(2391);
-        rd1.armLifterMotor.setPower(0.75);
-        rd1.armLifterMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        // drop the pixel
-        rd1.pixelDropperServo.setPosition(0.6);
+        ArmController.armLifterAuto(rd1.armLifterMotor, telemetry);
+        ArmController.pixelDropperAuto(rd1.pixelDropperServo);
+//        // extend vipers
+//        rd1.armLifterMotor.setTargetPosition(2391);
+//        rd1.armLifterMotor.setPower(0.75);
+//        rd1.armLifterMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        // drop the pixel
+//        rd1.pixelDropperServo.setPosition(0.6);
     }
 }

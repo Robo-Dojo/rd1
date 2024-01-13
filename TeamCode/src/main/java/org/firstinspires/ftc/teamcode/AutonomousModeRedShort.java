@@ -5,12 +5,15 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.checkerframework.checker.units.qual.A;
+import org.firstinspires.ftc.teamcode.subsystems.ArmController;
 import org.firstinspires.ftc.teamcode.subsystems.ObjectDetection;
 //endregion
 
 @Autonomous(name = "AutonomousRedShort")
 public class AutonomousModeRedShort extends LinearOpMode {
     HardwareInit rd1 = null;
+    ArmController ArmController = new ArmController();
     ObjectDetection objDet = new ObjectDetection();
 
     int frontRightTarget = 0;
@@ -182,19 +185,20 @@ public class AutonomousModeRedShort extends LinearOpMode {
     }
 
     private void extendVipers() {
-
+        ArmController.armLifterAuto(rd1.armLifterMotor, telemetry);
+        ArmController.pixelDropperAuto(rd1.pixelDropperServo);
 
         // extend vipers
-        rd1.armLifterMotor.setTargetPosition(2100); // 2391
-        telemetry.addData("Target pos set ", rd1.armLifterMotor.getTargetPosition());
-
-        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        telemetry.addData("Set mode ", rd1.armLifterMotor.getMode());
-        rd1.armLifterMotor.setPower(0.75);
-        telemetry.addData("Set power ", rd1.armLifterMotor.getPower());
-        // drop the pixel
-        rd1.pixelDropperServo.setPosition(0.68);
-        telemetry.addData("Set pixel drop pos", rd1.pixelDropperServo.getPosition());
-        telemetry.update();
+//        rd1.armLifterMotor.setTargetPosition(2100); // 2391
+//        telemetry.addData("Target pos set ", rd1.armLifterMotor.getTargetPosition());
+//
+//        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        telemetry.addData("Set mode ", rd1.armLifterMotor.getMode());
+//        rd1.armLifterMotor.setPower(0.75);
+//        telemetry.addData("Set power ", rd1.armLifterMotor.getPower());
+//        // drop the pixel
+//        rd1.pixelDropperServo.setPosition(0.68);
+//        telemetry.addData("Set pixel drop pos", rd1.pixelDropperServo.getPosition());
+//        telemetry.update();
     }
 }
