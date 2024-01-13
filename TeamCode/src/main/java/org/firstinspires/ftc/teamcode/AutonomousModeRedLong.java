@@ -3,13 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.subsystems.ObjectDetection;
 //endregion
 
 @Autonomous(name = "AutonomousRedLong")
 public class AutonomousModeRedLong extends LinearOpMode {
-    static HardwareInit rd1 = new HardwareInit();
+    HardwareInit rd1 = null;
     ObjectDetection objDet = new ObjectDetection();
 
     int frontRightTarget = 0;
@@ -74,7 +75,7 @@ public class AutonomousModeRedLong extends LinearOpMode {
         }
     }
 
-    private static void resetEncoders(){
+    private void resetEncoders(){
         rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -83,6 +84,7 @@ public class AutonomousModeRedLong extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        rd1 = new HardwareInit();
         rd1.init(hardwareMap, true);
 
         waitForStart();
@@ -100,11 +102,6 @@ public class AutonomousModeRedLong extends LinearOpMode {
             int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
-
-
-
-
-
 
             //Acest segment este full done
             if(objectDetectionResult == 1){
@@ -125,12 +122,6 @@ public class AutonomousModeRedLong extends LinearOpMode {
                 resetEncoders();
                 //place in front of backdrop
                 drive(0.2,-930,-930,-930,-930);
-                // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2100);
-                rd1.armLifterMotor.setPower(0.75);
-                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.68);
             }
 
             else if(objectDetectionResult == 2){
@@ -147,12 +138,6 @@ public class AutonomousModeRedLong extends LinearOpMode {
                 // goes to backboard
                 drive(0.7,-1000,-1000,-1000,-1000);
                 drive(0.2,-200,-200,-200,-200);
-                // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2100);
-                rd1.armLifterMotor.setPower(0.75);
-                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.68);
             }
 
             else if(objectDetectionResult == 3){
@@ -173,15 +158,23 @@ public class AutonomousModeRedLong extends LinearOpMode {
                 resetEncoders();
                 //place in front of backdrop
                 drive(0.2,-930,-930,-930,-930);
-                // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2391);
-                rd1.armLifterMotor.setPower(0.75);
-                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.6);
             }
 
-
+            if(objectDetectionResult >= 1 && objectDetectionResult <=3) {
+                extendVipers();
+            }
         }
+
+
+    }
+
+    private void extendVipers() {
+        // extend vipers
+        rd1.armLifterMotor.setTargetPosition(2391);
+        rd1.armLifterMotor.setPower(0.75);
+        rd1.armLifterMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // drop the pixel
+        rd1.pixelDropperServo.setPosition(0.6);
     }
 }
