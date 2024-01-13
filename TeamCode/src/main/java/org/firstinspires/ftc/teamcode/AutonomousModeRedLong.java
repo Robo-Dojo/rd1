@@ -98,9 +98,12 @@ public class AutonomousModeRedLong extends LinearOpMode {
             telemetry.update();
 
             int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
-
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
+
+
+
+
 
 
             //Acest segment este full done
@@ -121,53 +124,55 @@ public class AutonomousModeRedLong extends LinearOpMode {
                 //reset motor ticks
                 resetEncoders();
                 //place in front of backdrop
-                drive(0.2,-975,-975,-975,-975);
+                drive(0.2,-930,-930,-930,-930);
                 // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2391);
+                rd1.armLifterMotor.setTargetPosition(2100);
                 rd1.armLifterMotor.setPower(0.75);
                 rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.6);
+                rd1.pixelDropperServo.setPosition(0.68);
             }
 
             else if(objectDetectionResult == 2){
                 // goes to designated line
-                drive(0.65, -800,-800,-800,-800);
-                drive(0.3, -500,-500,-500,-500);
-                drive(0.2, 167, 167, 167, 167);
-                //rotate 90 dgr
-                drive(0.7, 1075,-1075,1075,-1075);
-                resetEncoders();
+                drive(0.7, -800,-800,-800,-800);
+                drive(0.3, -500, -500, -500, -500);
+                drive(0.7,200,200,200,200);
+                // goes under bridge
+                drive(0.7, 1115,-1115,-1115,1115);
                 // goes under gate
-                drive(0.7,-3900,-3900,-3900,-3900);
+                drive(0.7,-1440,-1440,-1440,-1440);
+                // rotate 90 degrees
+                drive(0.7, -1115,1115,-1115,1115);
                 // goes to backboard
+                drive(0.7,-1000,-1000,-1000,-1000);
                 drive(0.2,-200,-200,-200,-200);
+                // extend vipers
+                rd1.armLifterMotor.setTargetPosition(2100);
+                rd1.armLifterMotor.setPower(0.75);
+                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // drop the pixel
+                rd1.pixelDropperServo.setPosition(0.68);
             }
 
             else if(objectDetectionResult == 3){
                 // goes to designated line
                 drive(0.7,-1800,-600,-1800,-600);
                 // go back to backdrop trajectory
-                drive(0.7, 0,1200,0,1200);
-                // align to not hit the truss
-                drive(0.7, -550,-550,-550,-550);
-                resetEncoders();
+                drive(0.7, 1200,0,1200,0);
+                drive(0.7,-1640,-1640,-1640,-1640);
                 //rotate robot 90 dgr
-                drive(0.7, 1075,-1075,1075,-1075);
+                drive(0.7, 1115,-1115,1115,-1115);
                 //reset motor ticks
                 resetEncoders();
                 // go to backdrop playing field
-                drive(0.7,-3500,-3500,-3500,-3500);
-
-                //glide to align with backdrop
-                drive(0.7,-200,200,200,-200);
-
-                // go to backdrop playing field
-                drive(0.7,-400,-400,-400,-400);
+                drive(0.7,-3250,-3250,-3250,-3250);
+                // align robot to backdrop trajectory
+                drive(0.7, -1115,1115,1115,-1115);
                 //reset motor ticks
                 resetEncoders();
                 //place in front of backdrop
-                drive(0.2,-200,-200,-200,-200);
+                drive(0.2,-930,-930,-930,-930);
                 // extend vipers
                 rd1.armLifterMotor.setTargetPosition(2391);
                 rd1.armLifterMotor.setPower(0.75);

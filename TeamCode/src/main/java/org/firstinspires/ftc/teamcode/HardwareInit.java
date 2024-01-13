@@ -28,17 +28,18 @@ public class HardwareInit {
         rearRightMotor = hwMap.dcMotor.get("rearRightMotor");
         pixelGrabber = hwMap.dcMotor.get("pixelGrabber");
 
-        if (isAutonom) {
-            // specify motors run with encoders
-            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        } else {
-            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armLifterMotor = hwMap.get(DcMotor.class,"armLifterMotor");
+        pixelDropperServo = hwMap.get(Servo.class, "pixelDropperServo");
+        servoDrone = hwMap.get(Servo.class,"droneLauncher");
+
+        webcam = hwMap.get(WebcamName.class, "Webcam");
+
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        if (!isAutonom) {
             // specify motors run with encoders
             frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -50,17 +51,10 @@ public class HardwareInit {
             rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
         }
 
         //frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        armLifterMotor = hwMap.get(DcMotor.class,"armLifterMotor");
-        pixelDropperServo = hwMap.get(Servo.class, "pixelDropperServo");
-        servoDrone = hwMap.get(Servo.class,"droneLauncher");
-
-        webcam = hwMap.get(WebcamName.class, "Webcam");
     }
 }

@@ -125,11 +125,11 @@ public class AutonomousModeBlueLong extends LinearOpMode {
                 //place in front of backdrop
                 drive(0.2,-930,-930,-930,-930);
                 // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2391);
+                rd1.armLifterMotor.setTargetPosition(2100);
                 rd1.armLifterMotor.setPower(0.75);
                 rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.6);
+                rd1.pixelDropperServo.setPosition(0.68);
             }
 
             else if(objectDetectionResult == 2){
@@ -145,6 +145,12 @@ public class AutonomousModeBlueLong extends LinearOpMode {
                 // goes to backboard
                 drive(0.7,-1000,-1000,-1000,-1000);
                 drive(0.2,-200,-200,-200,-200);
+                // extend vipers
+                rd1.armLifterMotor.setTargetPosition(2100);
+                rd1.armLifterMotor.setPower(0.75);
+                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // drop the pixel
+                rd1.pixelDropperServo.setPosition(0.68);
             }
 
             else if(objectDetectionResult == 3){
@@ -166,11 +172,11 @@ public class AutonomousModeBlueLong extends LinearOpMode {
                 //place in front of backdrop
                 drive(0.2,-930,-930,-930,-930);
                 // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2391);
+                rd1.armLifterMotor.setTargetPosition(2100);
                 rd1.armLifterMotor.setPower(0.75);
                 rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.6);
+                rd1.pixelDropperServo.setPosition(0.68);
             }
 
         }

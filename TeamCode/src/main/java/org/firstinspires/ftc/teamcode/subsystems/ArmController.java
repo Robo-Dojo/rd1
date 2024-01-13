@@ -18,11 +18,11 @@ public class ArmController {
 
         // telemetry code for dev purpose
         if(armDropper) {
-            armMotor.setTargetPosition(0);
+            armMotor.setTargetPosition(10);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.75);
         } else if(armLifter){
-            armMotor.setTargetPosition(2391);
+            armMotor.setTargetPosition(2100); // 2391
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.75);
         }
@@ -31,12 +31,12 @@ public class ArmController {
 
     public void pixelDropper(Gamepad _gamepad2 ,Servo pixelDropperServo)
     {
-        if(_gamepad2.y){
+        if(_gamepad2.a){
             // set pixelDropper in position for dropping the pixels
-            pixelDropperServo.setPosition(0.6); // TODO: value to be adapted
-        } else if(_gamepad2.a){
+            pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
+        } else if(_gamepad2.y){
             // set pixelDropper in position for getting the pixels
-            pixelDropperServo.setPosition(-0.1); // TODO: value to be adapted
+            pixelDropperServo.setPosition(0.1); // TODO: value to be adapted
         }
 
     }

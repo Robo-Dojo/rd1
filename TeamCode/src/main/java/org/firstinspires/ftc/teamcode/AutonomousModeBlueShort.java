@@ -3,13 +3,15 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareDevice;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.subsystems.ObjectDetection;
 //endregion
 
 @Autonomous(name = "AutonomousBlueShort")
 public class AutonomousModeBlueShort extends LinearOpMode {
-    static HardwareInit rd1 = new HardwareInit();
+    HardwareInit rd1 = null;
     ObjectDetection objDet = new ObjectDetection();
 
     int frontRightTarget = 0;
@@ -78,7 +80,7 @@ public class AutonomousModeBlueShort extends LinearOpMode {
         }
     }
 
-    private static void resetEncoders(){
+    private void resetEncoders(){
         rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -87,7 +89,12 @@ public class AutonomousModeBlueShort extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        rd1 = new HardwareInit();
         rd1.init(hardwareMap, true);
+
+        DcMotor armLifterMotor = hardwareMap.get(DcMotor.class,"armLifterMotor");
+        Servo pixelDropperServo = hardwareMap.get(Servo.class, "pixelDropperServo");
+        Servo servoDrone = hardwareMap.get(Servo.class,"droneLauncher");
 
         waitForStart();
 
@@ -106,72 +113,56 @@ public class AutonomousModeBlueShort extends LinearOpMode {
             telemetry.update();
 
             if(objectDetectionResult == 1){
-
-                drive(0.65,-1800,-600,-1800,-600);
+                // goes to designated line
+                drive(0.65,-450,-1650,-450,-1650);
                 // go back to backdrop trajectory
-                drive(0.7, 0,1200,0,1200);
-
-
+                drive(0.7, 1050,0,1050,0);
                 //align to not hit the truss
                 drive(0.7, 400,400,400,400);
-                resetEncoders();
                 //rotate robot 90 dgr
-                drive(0.7, -1100,1100,-1100,1100);
+                drive(0.7, -1000,1000,-1000,1000);
                 resetEncoders();
                 //go on track
                 drive(0.7,-1100,-1100,-1100,-1100);
                 //glide to align with backdrop
                 resetEncoders();
                 drive(0.7,-1100,1100,1100,-1100);
-//
                 //drive to the backdrop
                 resetEncoders();
-                drive(0.7,-800,-800,-800,-800);
+                drive(0.7,-500,-500,-500,-500);
+                drive(0.7,-300,300,300,-300);
+
                 resetEncoders();
-                //coast slowly to hit the backdrop gently
-                drive(0.2,-100,-100,-100,-100);
-                resetEncoders();
-                // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2391);
-                rd1.armLifterMotor.setPower(0.75);
-                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.6);
+
+                extendVipers();
+                idle();
             }
 
             else if(objectDetectionResult == 2){
-                // goes to designated line
-                drive(0.7, -800,-800,-800,-800);
+                // goes to designated line and a bit back to bne able to rotate
+                drive(0.7, -700,-700,-700,-700);
                 drive(0.3, -500,-500,-500,-500);
                 drive(0.3,  200,200,200,200);
-                resetEncoders();
                 //rotate robot 90 dgr
-                drive(0.7, -1075,1075,-1075,1075);
+                drive(0.7, -1110,1110,-1110,1110);
                 resetEncoders();
-                //glide to align to backdrop
-
                 //drive to the backdrop
-                drive(0.7,-1900,-1900,-1900,-1900);
-//                drive(0.7, -100,100,100,-100);
                 resetEncoders();
+                drive(0.7,-1600,-1600,-1600,-1600);
                 //coast slowly to hit the backdrop gently
                 drive(0.2,-100,-100,-100,-100);
+                drive(0.7,-200,200,200,-200);
                 resetEncoders();
                 // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2391);
-                rd1.armLifterMotor.setPower(0.75);
-                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.6);
+                extendVipers();
+                idle();
             }
 
             else if(objectDetectionResult == 3){
-
                 // goes to designated line
-                drive(0.65,-600,-1800,-600,-1800);
+                drive(0.7,-1800,-600,-1800,-600);
                 // go back to backdrop trajectory
-                drive(0.7, 1200,0,1200,0);
-
+                drive(0.7, 0,1200,0,1200);
                 //align to not hit the truss
                 drive(0.7, -500,-500,-500,-500);
                 //rotate robot 90 dgr
@@ -179,17 +170,29 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 resetEncoders();
                 //drive to the backdrop
                 resetEncoders();
-                drive(0.7,-1900,-1900,-1900,-1900);
-                //coast slowly to hit the backdrop gently
-                drive(0.2,-100,-100,-100,-100);
+                drive(0.7,-1700,-1700,-1700,-1700);
+                drive(0.7,-300,300,300,-300);
+
                 resetEncoders();
                 // extend vipers
-                rd1.armLifterMotor.setTargetPosition(2391);
-                rd1.armLifterMotor.setPower(0.75);
-                rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                // drop the pixel
-                rd1.pixelDropperServo.setPosition(0.6);
+                extendVipers();
+                idle();
             }
         }
+    }
+    private void extendVipers() {
+        // extend vipers
+        rd1.armLifterMotor.setTargetPosition(2100); // 2391
+        telemetry.addData("Target pos set ", rd1.armLifterMotor.getTargetPosition());
+
+        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        telemetry.addData("Set mode ", rd1.armLifterMotor.getMode());
+        rd1.armLifterMotor.setPower(0.75);
+        telemetry.addData("Set power ", rd1.armLifterMotor.getPower());
+        // drop the pixel
+        rd1.pixelDropperServo.setPosition(0.68);
+        telemetry.addData("Set pixel drop pos", rd1.pixelDropperServo.getPosition());
+        telemetry.update();
+        //sleep(100000);
     }
 }
