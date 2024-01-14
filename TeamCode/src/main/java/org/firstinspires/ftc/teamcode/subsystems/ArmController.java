@@ -18,7 +18,7 @@ public class ArmController {
 
         // telemetry code for dev purpose
         if(armDropper) {
-            pixelDropperServo.setPosition(0.1);
+            pixelDropperServo.setPosition(0.68);
             armMotor.setTargetPosition(0);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.75);
