@@ -123,10 +123,10 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 drive(0.7,-1100,-1100,-1100,-1100);
                 //glide to align with backdrop
                 resetEncoders();
-                //drive(0.7,-1100,1100,1100,-1100);
+                drive(0.7,-1700,1700,1700,-1700);
                 //drive to the backdrop
                 resetEncoders();
-                //drive(0.7,-550,-550,-550,-550);
+                drive(0.45,-630,-630,-630,-630);
                 //drive(0.7,-350,350,350,-350);
 
                 resetEncoders();
@@ -146,10 +146,11 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 //drive to the backdrop
                 resetEncoders();
                 drive(0.7,-1600,-1600,-1600,-1600);
+                drive(0.7,-600,600,600,-600);
                 //coast slowly to hit the backdrop gently
                 drive(0.2,-100,-100,-100,-100);
-                drive(0.7,-200,200,200,-200);
-                drive(0.7,800,-800,-800,800);
+//                drive(0.7,-200,200,200,-200);
+//                drive(0.7,800,-800,-800,800);
                 resetEncoders();
                 // extend vipers
 //                extendVipers();

@@ -70,7 +70,7 @@ public class ObjectDetection {
                 break;
             }
             try {
-                Thread.sleep(30);
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
