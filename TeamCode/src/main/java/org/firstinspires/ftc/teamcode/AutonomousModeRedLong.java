@@ -87,6 +87,10 @@ public class AutonomousModeRedLong extends LinearOpMode {
         rd1 = new HardwareInit();
         rd1.init(hardwareMap, true);
 
+        int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
+        telemetry.addData("Object Detection Result:", objectDetectionResult);
+        telemetry.update();
+
         waitForStart();
 
         // TODO: code all steps
@@ -99,69 +103,74 @@ public class AutonomousModeRedLong extends LinearOpMode {
 
             telemetry.update();
 
-            int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
-            telemetry.addData("Object Detection Result:", objectDetectionResult);
-            telemetry.update();
-
-            //Acest segment este full done
+            //right
             if(objectDetectionResult == 1){
                 // goes to designated line
-                drive(0.7,-600,-1800,-600,-1800);
+                drive(0.65,-450,-1650,-450,-1650);
                 // go back to backdrop trajectory
-                drive(0.7, 1200,0,1200,0);
-                drive(0.7,-1640,-1640,-1640,-1640);
+                drive(0.7, 1050,0,1050,0);
+                //align to not hit the truss
+                drive(0.7, 400,400,400,400);
                 //rotate robot 90 dgr
-                drive(0.7, 1115,-1115,1115,-1115);
-                //reset motor ticks
+                drive(0.7, 1200,-1200,1200,-1200);
                 resetEncoders();
-                // go to backdrop playing field
-                drive(0.7,-3250,-3250,-3250,-3250);
-                // align robot to backdrop trajectory
-                drive(0.7, -1115,1115,1115,-1115);
-                //reset motor ticks
+                //go on track
+                drive(0.7,-3200,-3200,-3200,-3200);
+                //glide to align with backdrop
+//                resetEncoders();
+//                drive(0.7,1100,-1100,-1100,1100);
+//                //drive to the backdrop
+//                resetEncoders();
+//                drive(0.7,-350,-350,-350,-350);
+//                drive(0.7,300,-300,-300,300);
+
                 resetEncoders();
-                //place in front of backdrop
-                drive(0.2,-930,-930,-930,-930);
+
+//                extendVipers();
+
             }
 
+            // center
             else if(objectDetectionResult == 2){
-                // goes to designated line
-                drive(0.7, -800,-800,-800,-800);
-                drive(0.3, -500, -500, -500, -500);
-                drive(0.7,200,200,200,200);
-                // goes under bridge
-                drive(0.7, 1115,-1115,-1115,1115);
-                // goes under gate
-                drive(0.7,-1440,-1440,-1440,-1440);
-                // rotate 90 degrees
-                drive(0.7, -1115,1115,-1115,1115);
-                // goes to backboard
-                drive(0.7,-1000,-1000,-1000,-1000);
-                drive(0.2,-200,-200,-200,-200);
-            }
+                // goes to designated line and a bit back to bne able to rotate
+                drive(0.7, -700,-700,-700,-700);
+                drive(0.3, -500,-500,-500,-500);
+                drive(0.3,  200,200,200,200);
+                //rotate robot 90 dgr
+                drive(0.7, 1110,-1110,1110,-1110);
+                resetEncoders();
+                drive(0.7,1000,-1000,-1000,1000);
+                //drive to the backdrop
+                resetEncoders();
+                drive(0.7,-3000,-3000,-3000,-3000);
+                //coast slowly to hit the backdrop gently
+                //drive(0.2,-100,-100,-100,-100);
 
-            else if(objectDetectionResult == 3){
+                resetEncoders();
+                // extend vipers
+//                extendVipers();
+
+            }
+            // left
+            else if(objectDetectionResult==3){
                 // goes to designated line
                 drive(0.7,-1800,-600,-1800,-600);
                 // go back to backdrop trajectory
-                drive(0.7, 1200,0,1200,0);
-                drive(0.7,-1640,-1640,-1640,-1640);
+                drive(0.7, 0,1200,0,1200);
+                //align to not hit the truss
+                drive(0.7, 1200,1200,1200,1200);
                 //rotate robot 90 dgr
-                drive(0.7, 1115,-1115,1115,-1115);
-                //reset motor ticks
+                drive(0.7, 1110,-1110,1110,-1110);
                 resetEncoders();
-                // go to backdrop playing field
-                drive(0.7,-3250,-3250,-3250,-3250);
-                // align robot to backdrop trajectory
-                drive(0.7, -1115,1115,1115,-1115);
-                //reset motor ticks
+                //drive to the backdrop
                 resetEncoders();
-                //place in front of backdrop
-                drive(0.2,-930,-930,-930,-930);
-            }
+                drive(0.7,-3200,-3200,-3200,-3200);
 
-            if(objectDetectionResult >= 1 && objectDetectionResult <=3) {
-                extendVipers();
+
+                resetEncoders();
+                // extend vipers
+//                extendVipers();
+
             }
         }
 

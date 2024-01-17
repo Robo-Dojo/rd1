@@ -93,9 +93,9 @@ public class AutonomousModeBlueShort extends LinearOpMode {
         rd1 = new HardwareInit();
         rd1.init(hardwareMap, true);
 
-        DcMotor armLifterMotor = hardwareMap.get(DcMotor.class,"armLifterMotor");
-        Servo pixelDropperServo = hardwareMap.get(Servo.class, "pixelDropperServo");
-        Servo servoDrone = hardwareMap.get(Servo.class,"droneLauncher");
+        int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
+        telemetry.addData("Object Detection Result:", objectDetectionResult);
+        telemetry.update();
 
         waitForStart();
 
@@ -107,10 +107,6 @@ public class AutonomousModeBlueShort extends LinearOpMode {
             telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
             telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
 
-            telemetry.update();
-
-            int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
-            telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
             if(objectDetectionResult == 1){

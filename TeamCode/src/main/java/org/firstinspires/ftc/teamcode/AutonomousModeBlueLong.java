@@ -93,6 +93,10 @@ public class AutonomousModeBlueLong extends LinearOpMode {
         rd1 = new HardwareInit();
         rd1.init(hardwareMap, true);
 
+        int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
+        telemetry.addData("Object Detection Result:", objectDetectionResult);
+        telemetry.update();
+
         waitForStart();
 
         // TODO: code all steps
@@ -103,10 +107,6 @@ public class AutonomousModeBlueLong extends LinearOpMode {
             telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
             telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
 
-            telemetry.update();
-
-            int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
-            telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
             // TODO: Use switch
