@@ -3,11 +3,27 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.HardwareInit;
 // endregion
 
 public class ChassyController {
-    public void dcpMovement(Gamepad _gamepad1, DcMotor frontLeftMotor, DcMotor rearLeftMotor, DcMotor frontRightMotor, DcMotor rearRightMotor)
+    private HardwareInit rd1;
+    private Telemetry telemetry;
+
+    int frontRightTarget = 0;
+    int frontLeftTarget = 0;
+    int rearLeftTarget = 0;
+    int rearRightTarget = 0;
+
+    // class constructor
+    public ChassyController(HardwareInit rd1, Telemetry telemetry)
+    {
+        this.rd1 = rd1;
+        this.telemetry = telemetry;
+    }
+
+    public void dcpMovement(Gamepad _gamepad1)
     {
         // read values gamepad 1
         double accelerator = (0.3 + _gamepad1.right_trigger);
@@ -23,26 +39,33 @@ public class ChassyController {
         double rearRightPower = ((gp1Y - gp1X - gp1RotationX) / denominator);
 
         // assign values to engines
-        frontLeftMotor.setPower(frontLeftPower);
-        rearLeftMotor.setPower(rearLeftPower);
-        frontRightMotor.setPower(frontRightPower);
-        rearRightMotor.setPower(rearRightPower);
+        rd1.frontLeftMotor.setPower(frontLeftPower);
+        rd1.rearLeftMotor.setPower(rearLeftPower);
+        rd1.frontRightMotor.setPower(frontRightPower);
+        rd1.rearRightMotor.setPower(rearRightPower);
 
     }
 
-    public static void autonomousMovement(double power, int frontRightTicks, int frontLeftTicks, int rearRightTicks, int rearLeftTicks) {
-        HardwareInit rd1 = new HardwareInit();
+    public void autonomousMovement(double power, int frontRightTicks, int frontLeftTicks, int rearRightTicks, int rearLeftTicks)
+    {
+        telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
+        telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
+        telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
 
-        int frontRightTarget;
-        int frontLeftTarget;
-        int rearLeftTarget;
-        int rearRightTarget;
+        telemetry.update();
 
         // Create target positions
         frontRightTarget = rd1.frontRightMotor.getCurrentPosition() + frontRightTicks;
         frontLeftTarget = rd1.frontLeftMotor.getCurrentPosition() + frontLeftTicks;
         rearRightTarget = rd1.rearRightMotor.getCurrentPosition() + rearRightTicks;
         rearLeftTarget = rd1.rearLeftMotor.getCurrentPosition() + rearLeftTicks;
+
+        // Create target positions
+//            frontRightTarget += frontRightTicks;
+//            frontLeftTarget += frontLeftTicks;
+//            rearRightTarget += rearRightTicks;
+//            rearLeftTarget += rearLeftTicks;
 
         // set target position
         rd1.frontRightMotor.setTargetPosition(frontLeftTarget);
@@ -68,9 +91,25 @@ public class ChassyController {
         }
 
         // set motor power back to 0
-        rd1.frontRightMotor.setPower(0);
-        rd1.frontLeftMotor.setPower(0);
-        rd1.rearRightMotor.setPower(0);
-        rd1.rearLeftMotor.setPower(0);
-        }
+//            rd1.frontRightMotor.setPower(0);
+//            rd1.frontLeftMotor.setPower(0);
+//            rd1.rearRightMotor.setPower(0);
+//            rd1.rearLeftMotor.setPower(0);
+
+        telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
+        telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
+        telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
+
+        telemetry.update();
+    }
+
+    public void resetEncoders()
+    {
+        rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
 }

@@ -4,25 +4,33 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.HardwareInit;
 //endregion
 
 public class PixelGabber {
-    public static boolean isOn = false;
-    public static void pixelGrabber(Gamepad _gamepad2, DcMotor pixelMotor){
+    public boolean isOn = false;
+    private HardwareInit rd1;
+
+    public PixelGabber(HardwareInit rd1)
+    {
+        this.rd1 = rd1;
+    }
+
+    public void pixelGrabber(Gamepad _gamepad2){
         if(_gamepad2.x == true && isOn == false){
-            pixelMotor.setPower(0.6);
+            rd1.pixelGrabber.setPower(0.6);
         }
         else if(_gamepad2.x == true && isOn == true){
-            pixelMotor.setPower(0);
+            rd1.pixelGrabber.setPower(0);
         }
         else if(_gamepad2.b == true && isOn == false){
-            pixelMotor.setPower(-0.6);
+            rd1.pixelGrabber.setPower(-0.6);
         }
         else if(_gamepad2.b == true && isOn == true){
-            pixelMotor.setPower(0);
+            rd1.pixelGrabber.setPower(0);
         }
         else{
-            pixelMotor.setPower(0);
+            rd1.pixelGrabber.setPower(0);
         }
     }
 }
