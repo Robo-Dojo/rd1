@@ -104,6 +104,30 @@ public class ChassyController {
         telemetry.update();
     }
 
+    public void forward(double power, int ticks) {
+        autonomousMovement(power, -ticks, -ticks, -ticks, -ticks);
+    }
+
+    public void reverse(double power, int ticks) {
+        autonomousMovement(power, ticks, ticks, ticks, ticks);
+    }
+
+    public void left(double power, int ticks) {
+        autonomousMovement(power, -ticks, ticks, ticks, -ticks);
+    }
+
+    public void right(double power, int ticks) {
+        autonomousMovement(power, ticks, -ticks, -ticks, ticks);
+    }
+
+    public void rotate90Left(double power) {
+        autonomousMovement(power, -1000,1000,-1000,1000);
+    }
+
+    public void rotate90Right(double power) {
+        autonomousMovement(power, 1000,-1000,1000,-1000);
+    }
+
     public void resetEncoders()
     {
         rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
