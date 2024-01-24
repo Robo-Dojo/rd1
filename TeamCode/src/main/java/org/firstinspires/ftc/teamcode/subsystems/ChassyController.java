@@ -79,6 +79,11 @@ public class ChassyController {
         rd1.rearRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rd1.rearLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        rd1.frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rd1.frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rd1.rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rd1.rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         //run to position at the designated power
         rd1.frontRightMotor.setPower(power);
         rd1.frontLeftMotor.setPower(power);
@@ -86,15 +91,15 @@ public class ChassyController {
         rd1.rearLeftMotor.setPower(power);
 
         // wait until all motors are no longer busy running to position
-        while (rd1.frontRightMotor.isBusy() || rd1.frontLeftMotor.isBusy() || rd1.rearLeftMotor.isBusy() || rd1.rearRightMotor.isBusy()) {
+        while (isOnTarget()) {
             // do nothing
         }
 
         // set motor power back to 0
-//            rd1.frontRightMotor.setPower(0);
-//            rd1.frontLeftMotor.setPower(0);
-//            rd1.rearRightMotor.setPower(0);
-//            rd1.rearLeftMotor.setPower(0);
+            rd1.frontRightMotor.setPower(0);
+            rd1.frontLeftMotor.setPower(0);
+            rd1.rearRightMotor.setPower(0);
+            rd1.rearLeftMotor.setPower(0);
 
         telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
         telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
@@ -102,6 +107,18 @@ public class ChassyController {
         telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
 
         telemetry.update();
+    }
+
+    public boolean isOnTarget() {
+        double frontRightMotorCheck = Math.abs(rd1.frontRightMotor.getCurrentPosition() - rd1.frontRightMotor.getTargetPosition());
+        double frontLeftMotorCheck = Math.abs(rd1.frontLeftMotor.getCurrentPosition() - rd1.frontLeftMotor.getTargetPosition());
+        double rearRightMotorCheck = Math.abs(rd1.rearRightMotor.getCurrentPosition() - rd1.rearRightMotor.getTargetPosition());
+        double rearLeftMotorCheck = Math.abs(rd1.rearLeftMotor.getCurrentPosition() - rd1.rearLeftMotor.getTargetPosition());
+        if (frontRightMotorCheck > 10 && frontLeftMotorCheck > 10 && rearRightMotorCheck > 10 && rearLeftMotorCheck > 10) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void forward(double power, int ticks) {
