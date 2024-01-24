@@ -114,7 +114,7 @@ public class ChassyController {
         double frontLeftMotorCheck = Math.abs(rd1.frontLeftMotor.getCurrentPosition() - rd1.frontLeftMotor.getTargetPosition());
         double rearRightMotorCheck = Math.abs(rd1.rearRightMotor.getCurrentPosition() - rd1.rearRightMotor.getTargetPosition());
         double rearLeftMotorCheck = Math.abs(rd1.rearLeftMotor.getCurrentPosition() - rd1.rearLeftMotor.getTargetPosition());
-        if (frontRightMotorCheck > 10 && frontLeftMotorCheck > 10 && rearRightMotorCheck > 10 && rearLeftMotorCheck > 10) {
+        if (frontRightMotorCheck > 10 || frontLeftMotorCheck > 10 || rearRightMotorCheck > 10 || rearLeftMotorCheck > 10) {
             return true;
         } else {
             return false;
