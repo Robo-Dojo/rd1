@@ -13,10 +13,13 @@ public class ArmController {
     private HardwareInit rd1;
     private Telemetry telemetry;
 
+    private int armLifterPosition = 0;
+
     public ArmController(HardwareInit rd1, Telemetry telemetry)
     {
         this.rd1 = rd1;
         this.telemetry = telemetry;
+        rd1.pixelDropperServo.setPosition(0.1); // TODO: value to be adapted
     }
 
     public void armLifter(Gamepad _gamepad2)
@@ -27,15 +30,19 @@ public class ArmController {
 
         // telemetry code for dev purpose
         if(armDropper) {
+            armLifterPosition = 0;
             this.rd1.pixelDropperServo.setPosition(0.68);
-            this.rd1.armLifterMotor.setTargetPosition(0);
+            this.rd1.armLifterMotor.setTargetPosition(armLifterPosition);
             this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             this.rd1.armLifterMotor.setPower(0.75);
         }
         else if(armLifter){
-            this.rd1.armLifterMotor.setTargetPosition(2000); // 2391
-            this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            this.rd1.armLifterMotor.setPower(0.75);
+            armLifterPosition += 100;
+            if(armLifterPosition <= 2000) {
+                this.rd1.armLifterMotor.setTargetPosition(armLifterPosition); // 2391
+                this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                this.rd1.armLifterMotor.setPower(0.75);
+            }
         }
 
     }
