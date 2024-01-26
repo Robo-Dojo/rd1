@@ -18,13 +18,13 @@ public class PixelGabber {
 
     public void pixelGrabber(Gamepad _gamepad2){
         if(_gamepad2.x == true && isOn == false){
-            this.rd1.pixelGrabber.setPower(0.7);
+            this.rd1.pixelGrabber.setPower(0.8);
         }
         else if(_gamepad2.x == true && isOn == true){
             this.rd1.pixelGrabber.setPower(0);
         }
         else if(_gamepad2.b == true && isOn == false){
-            this.rd1.pixelGrabber.setPower(-0.7);
+            this.rd1.pixelGrabber.setPower(-0.8);
         }
         else if(_gamepad2.b == true && isOn == true){
             this.rd1.pixelGrabber.setPower(0);

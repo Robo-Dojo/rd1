@@ -41,8 +41,10 @@ public class HardwareInit {
         armLifterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         if (isAutonom){
+
             frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             rearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         }
 
         else {
@@ -62,7 +64,6 @@ public class HardwareInit {
 
         }
 
-        //frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 }

@@ -35,8 +35,8 @@ public class ChassyController {
         double denominator = Math.max(Math.abs(gp1Y) + Math.abs(gp1X) + Math.abs(gp1RotationX), 1);
         double frontLeftPower = ((gp1Y - gp1X + gp1RotationX) / denominator);
         double rearLeftPower = ((gp1Y + gp1X + gp1RotationX) / denominator);
-        double frontRightPower = ((gp1Y + gp1X - gp1RotationX) / denominator);
-        double rearRightPower = ((gp1Y - gp1X - gp1RotationX) / denominator);
+        double frontRightPower = ((gp1Y - gp1X - gp1RotationX) / denominator);
+        double rearRightPower = ((gp1Y + gp1X - gp1RotationX) / denominator);
 
         // assign values to engines
         this.rd1.frontLeftMotor.setPower(frontLeftPower);
