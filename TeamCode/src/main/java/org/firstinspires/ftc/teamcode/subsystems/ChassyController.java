@@ -39,27 +39,27 @@ public class ChassyController {
         double rearRightPower = ((gp1Y - gp1X - gp1RotationX) / denominator);
 
         // assign values to engines
-        rd1.frontLeftMotor.setPower(frontLeftPower);
-        rd1.rearLeftMotor.setPower(rearLeftPower);
-        rd1.frontRightMotor.setPower(frontRightPower);
-        rd1.rearRightMotor.setPower(rearRightPower);
+        this.rd1.frontLeftMotor.setPower(frontLeftPower);
+        this.rd1.rearLeftMotor.setPower(rearLeftPower);
+        this.rd1.frontRightMotor.setPower(frontRightPower);
+        this.rd1.rearRightMotor.setPower(rearRightPower);
 
     }
 
     public void autonomousMovement(double power, int frontRightTicks, int frontLeftTicks, int rearRightTicks, int rearLeftTicks)
     {
-        telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
-        telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
-        telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
-        telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
+        telemetry.addData("FRM= ", this.rd1.frontRightMotor.getCurrentPosition());
+        telemetry.addData("FLM= ", this.rd1.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("RLM= ", this.rd1.rearLeftMotor.getCurrentPosition());
+        telemetry.addData("RRM= ", this.rd1.rearRightMotor.getCurrentPosition());
 
         telemetry.update();
 
         // Create target positions
-        frontRightTarget = rd1.frontRightMotor.getCurrentPosition() + frontRightTicks;
-        frontLeftTarget = rd1.frontLeftMotor.getCurrentPosition() + frontLeftTicks;
-        rearRightTarget = rd1.rearRightMotor.getCurrentPosition() + rearRightTicks;
-        rearLeftTarget = rd1.rearLeftMotor.getCurrentPosition() + rearLeftTicks;
+        frontRightTarget = this.rd1.frontRightMotor.getCurrentPosition() + frontRightTicks;
+        frontLeftTarget = this.rd1.frontLeftMotor.getCurrentPosition() + frontLeftTicks;
+        rearRightTarget = this.rd1.rearRightMotor.getCurrentPosition() + rearRightTicks;
+        rearLeftTarget = this.rd1.rearLeftMotor.getCurrentPosition() + rearLeftTicks;
 
         // Create target positions
 //            frontRightTarget += frontRightTicks;
@@ -68,27 +68,27 @@ public class ChassyController {
 //            rearLeftTarget += rearLeftTicks;
 
         // set target position
-        rd1.frontRightMotor.setTargetPosition(frontLeftTarget);
-        rd1.frontLeftMotor.setTargetPosition(frontRightTarget);
-        rd1.rearRightMotor.setTargetPosition(rearLeftTarget);
-        rd1.rearLeftMotor.setTargetPosition(rearRightTarget);
+        this.rd1.frontRightMotor.setTargetPosition(frontLeftTarget);
+        this.rd1.frontLeftMotor.setTargetPosition(frontRightTarget);
+        this.rd1.rearRightMotor.setTargetPosition(rearLeftTarget);
+        this.rd1.rearLeftMotor.setTargetPosition(rearRightTarget);
 
         //switch to run to position mode
-        rd1.frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rd1.frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rd1.rearRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rd1.rearLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        this.rd1.frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        this.rd1.frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        this.rd1.rearRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        this.rd1.rearLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        rd1.frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rd1.frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rd1.rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rd1.rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rd1.frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rd1.frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rd1.rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rd1.rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //run to position at the designated power
-        rd1.frontRightMotor.setPower(power);
-        rd1.frontLeftMotor.setPower(power);
-        rd1.rearRightMotor.setPower(power);
-        rd1.rearLeftMotor.setPower(power);
+        this.rd1.frontRightMotor.setPower(power);
+        this.rd1.frontLeftMotor.setPower(power);
+        this.rd1.rearRightMotor.setPower(power);
+        this.rd1.rearLeftMotor.setPower(power);
 
         // wait until all motors are no longer busy running to position
         while (isOnTarget()) {
@@ -96,24 +96,24 @@ public class ChassyController {
         }
 
         // set motor power back to 0
-            rd1.frontRightMotor.setPower(0);
-            rd1.frontLeftMotor.setPower(0);
-            rd1.rearRightMotor.setPower(0);
-            rd1.rearLeftMotor.setPower(0);
+            this.rd1.frontRightMotor.setPower(0);
+            this.rd1.frontLeftMotor.setPower(0);
+            this.rd1.rearRightMotor.setPower(0);
+            this.rd1.rearLeftMotor.setPower(0);
 
-        telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
-        telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
-        telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
-        telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
+        telemetry.addData("FRM= ", this.rd1.frontRightMotor.getCurrentPosition());
+        telemetry.addData("FLM= ", this.rd1.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("RLM= ", this.rd1.rearLeftMotor.getCurrentPosition());
+        telemetry.addData("RRM= ", this.rd1.rearRightMotor.getCurrentPosition());
 
         telemetry.update();
     }
 
     public boolean isOnTarget() {
-        double frontRightMotorCheck = Math.abs(rd1.frontRightMotor.getCurrentPosition() - rd1.frontRightMotor.getTargetPosition());
-        double frontLeftMotorCheck = Math.abs(rd1.frontLeftMotor.getCurrentPosition() - rd1.frontLeftMotor.getTargetPosition());
-        double rearRightMotorCheck = Math.abs(rd1.rearRightMotor.getCurrentPosition() - rd1.rearRightMotor.getTargetPosition());
-        double rearLeftMotorCheck = Math.abs(rd1.rearLeftMotor.getCurrentPosition() - rd1.rearLeftMotor.getTargetPosition());
+        double frontRightMotorCheck = Math.abs(this.rd1.frontRightMotor.getCurrentPosition() - this.rd1.frontRightMotor.getTargetPosition());
+        double frontLeftMotorCheck = Math.abs(this.rd1.frontLeftMotor.getCurrentPosition() - this.rd1.frontLeftMotor.getTargetPosition());
+        double rearRightMotorCheck = Math.abs(this.rd1.rearRightMotor.getCurrentPosition() - this.rd1.rearRightMotor.getTargetPosition());
+        double rearLeftMotorCheck = Math.abs(this.rd1.rearLeftMotor.getCurrentPosition() - this.rd1.rearLeftMotor.getTargetPosition());
         if (frontRightMotorCheck > 10 || frontLeftMotorCheck > 10 || rearRightMotorCheck > 10 || rearLeftMotorCheck > 10) {
             return true;
         } else {
@@ -122,35 +122,51 @@ public class ChassyController {
     }
 
     public void forward(double power, int ticks) {
-        autonomousMovement(power, -ticks, -ticks, -ticks, -ticks);
-    }
-
-    public void reverse(double power, int ticks) {
         autonomousMovement(power, ticks, ticks, ticks, ticks);
     }
 
-    public void left(double power, int ticks) {
-        autonomousMovement(power, -ticks, ticks, ticks, -ticks);
+    public void reverse(double power, int ticks) {
+        autonomousMovement(power, -ticks, -ticks, -ticks, -ticks);
     }
 
-    public void right(double power, int ticks) {
+    public void left(double power, int ticks) {
         autonomousMovement(power, ticks, -ticks, -ticks, ticks);
     }
 
+    public void right(double power, int ticks) {
+        autonomousMovement(power, -ticks, ticks, ticks, -ticks);
+    }
+
+    public void forward45DegreeLeft(double power, int ticks) {
+        // Go forward
+        autonomousMovement(power, ticks+1300, ticks, ticks+1300, ticks);
+        resetEncoders();
+        // Go backward
+        autonomousMovement(power, -1210, 0, -1210, 0);
+    }
+
+    public void forward45DegreeRight(double power, int ticks) {
+        // Go forward
+        autonomousMovement(power, ticks, ticks+1300, ticks, ticks+1300);
+        resetEncoders();
+        // Go backward
+        autonomousMovement(power, 0, -1210, 0, -1210);
+    }
+
     public void rotate90Left(double power) {
-        autonomousMovement(power, -1000,1000,-1000,1000);
+        autonomousMovement(power, 740,-740,740,-740);
     }
 
     public void rotate90Right(double power) {
-        autonomousMovement(power, 1000,-1000,1000,-1000);
+        autonomousMovement(power, -740,740,-740,740);
     }
 
     public void resetEncoders()
     {
-        rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.rd1.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.rd1.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.rd1.rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.rd1.rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
 }

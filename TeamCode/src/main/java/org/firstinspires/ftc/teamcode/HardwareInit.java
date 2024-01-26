@@ -40,7 +40,12 @@ public class HardwareInit {
         rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armLifterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        if (!isAutonom) {
+        if (isAutonom){
+            frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        }
+
+        else {
             // specify motors run with encoders
             frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -52,10 +57,12 @@ public class HardwareInit {
             rearLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rearRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+            frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         }
 
         //frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        rearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
 }

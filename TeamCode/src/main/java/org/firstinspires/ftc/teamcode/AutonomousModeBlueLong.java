@@ -32,60 +32,120 @@ public class AutonomousModeBlueLong extends LinearOpMode {
         // TODO: code all steps
         if (opModeIsActive()) {
             // TODO: Use switch
-            // left?
+            // right
             if(objectDetectionResult == 1){
-                // goes to designated line
-                chassyController.autonomousMovement(0.7,-600,-1800,-600,-1800);
-                // go back to backdrop trajectory
-                chassyController.autonomousMovement(0.7, 1200,0,1200,0);
-                chassyController.autonomousMovement(0.7,-1640,-1640,-1640,-1640);
-                //rotate robot 90 dgr
-                chassyController.autonomousMovement(0.7, -1115,1115,-1115,1115);
-                //reset motor ticks
+                // Punem pixelu
+                chassyController.forward45DegreeRight(0.5, 500);
+                // Mergem putin inainte pe mijlocul tile-ului
+                chassyController.forward(1, 1500);
+                // Rotim spre backboard
+                chassyController.rotate90Left(1);
+                // Reset
                 chassyController.resetEncoders();
-                // go to backdrop playing field
-                chassyController.autonomousMovement(0.7,-3250,-3250,-3250,-3250);
-                // align robot to backdrop trajectory
-                chassyController.autonomousMovement(0.7, 1115,-1115,-1115,1115);
-                //reset motor ticks
+                // Mergem spre backboard
+                chassyController.forward(1, 2000);
+                // Ne aliniem cu backboardul
+                chassyController.left(1, 500);
+                // Mergem incet spre backboard
+                chassyController.forward(0.3, 200);
+                // Reset
                 chassyController.resetEncoders();
-                //place in front of backdrop
-                chassyController.autonomousMovement(0.2,-930,-930,-930,-930);
+                // Extindem viperele
+                ArmController.extendArm();
+                // Actionam cupa
+                ArmController.dropPixel();
+                // Punem cupa la loc
+                ArmController.returnPixelDropper();
+                // Retragem viperele
+                ArmController.retractArm();
+                // Dam cu spatele putin
+                chassyController.reverse(1, 200);
+                // Mergem la stanga
+                chassyController.right(1, 500);
+                // Ne parcam
+                chassyController.forward(0.7, 300);
+                // THE END - 1
             }
-            // center ?
+            // center
             else if(objectDetectionResult == 2){
-                // goes to designated line
-                chassyController.autonomousMovement(0.7, -900,-900,-900,-900);
-                chassyController.autonomousMovement(0.7, 100, 100, 100, 100);
-                // goes under the bridge
-                chassyController.autonomousMovement(0.7, 1115,-1115,-1115,1115);
-                // goes under gate
-                chassyController.autonomousMovement(0.7,-1440,-1440,-1440,-1440);
-                // rotate 90 degrees
-                chassyController.autonomousMovement(0.7, -1115,1115,-1115,1115);
-                // goes to backboard
-                chassyController.autonomousMovement(0.7,-1000,-1000,-1000,-1000);
-                chassyController.autonomousMovement(0.2,-200,-200,-200,-200);
+                // Mergem spre linie cu oprire putin inainte
+                chassyController.forward(1,1000);
+                // Mergem incet spre linie
+                chassyController.forward(0.3,350);
+                // Dam cu spatele, putin mai mult ca sa nu lovim pixelul
+                chassyController.reverse(1, 350);
+                // Reset
+                chassyController.resetEncoders();
+                // Mergem spre dreapta putin
+                chassyController.right(1,350);
+                // Mergem inainte
+                chassyController.forward(1, 500);
+                // Rotim spre backboard
+                chassyController.rotate90Left(1);
+                // Reset
+                chassyController.resetEncoders();
+                // Mergem spre backboard
+                chassyController.forward(1, 2000);
+                // Ne aliniem cu backboardul
+                chassyController.left(1, 500);
+                // Ne apropiem incet de backboard
+                chassyController.forward(0.3, 200);
+                // Reset
+                chassyController.resetEncoders();
+                // Extindem viperele
+                ArmController.extendArm();
+                // Actionam cupa
+                ArmController.dropPixel();
+                // Punem cupa la loc
+                ArmController.returnPixelDropper();
+                // Retragem viperele
+                ArmController.retractArm();
+                // Dam cu spatele putin
+                chassyController.reverse(1, 200);
+                // Mergem la stanga
+                chassyController.right(1, 500);
+                // Ne parcam
+                chassyController.forward(0.7, 300);
+                // THE END - 2
             }
-            // right?
+            // left
             else if(objectDetectionResult == 3){
-                // goes to designated line
-                chassyController.autonomousMovement(0.7,-1800,-600,-1800,-600);
-                // go back to backdrop trajectory
-                chassyController.autonomousMovement(0.7, 1200,0,1200,0);
-                chassyController.autonomousMovement(0.7,-1640,-1640,-1640,-1640);
-                //rotate robot 90 dgr
-                chassyController.autonomousMovement(0.7, -1115,1115,-1115,1115);
-                //reset motor ticks
+                // Punem pixelul
+                chassyController.forward45DegreeLeft(0.5, 500);
                 chassyController.resetEncoders();
-                // go to backdrop playing field
-                chassyController.autonomousMovement(0.7,-3250,-3250,-3250,-3250);
-                // align robot to backdrop trajectory
-                chassyController.autonomousMovement(0.7, 1115,-1115,-1115,1115);
-                //reset motor ticks
+                sleep(1000);
+                // Mergem putin inainte pe mijlocul tile-ului
+                chassyController.forward(1, 1500);
+                sleep(1000);
+                // Rotim spre backboard
+                chassyController.rotate90Left(1);
+                // Reset
                 chassyController.resetEncoders();
-                //place in front of backdrop
-                chassyController.autonomousMovement(0.2,-930,-930,-930,-930);
+                // Mergem spre backboard
+                chassyController.forward(1, 3000);
+                chassyController.resetEncoders();
+                // Ne aliniem cu backboardul
+                chassyController.left(1, 500);
+                chassyController.resetEncoders();
+                // Mergem incet spre backboard
+                chassyController.forward(0.3, 200);
+                // Reset
+                chassyController.resetEncoders();
+                // Extindem viperele
+                ArmController.extendArm();
+                // Actionam cupa
+                ArmController.dropPixel();
+                // Punem cupa la loc
+                ArmController.returnPixelDropper();
+                // Retragem viperele
+                ArmController.retractArm();
+                // Dam cu spatele putin
+                chassyController.reverse(1, 200);
+                // Mergem la stanga
+                chassyController.right(1, 200);
+                // Ne parcam
+                chassyController.forward(0.7, 300);
+                // THE END - 3
             }
         }
     }

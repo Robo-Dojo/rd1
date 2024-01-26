@@ -27,15 +27,15 @@ public class ArmController {
 
         // telemetry code for dev purpose
         if(armDropper) {
-            rd1.pixelDropperServo.setPosition(0.68);
-            rd1.armLifterMotor.setTargetPosition(0);
-            rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rd1.armLifterMotor.setPower(0.75);
+            this.rd1.pixelDropperServo.setPosition(0.68);
+            this.rd1.armLifterMotor.setTargetPosition(0);
+            this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            this.rd1.armLifterMotor.setPower(0.75);
         }
         else if(armLifter){
-            rd1.armLifterMotor.setTargetPosition(2000); // 2391
-            rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rd1.armLifterMotor.setPower(0.75);
+            this.rd1.armLifterMotor.setTargetPosition(2000); // 2391
+            this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            this.rd1.armLifterMotor.setPower(0.75);
         }
 
     }
@@ -44,37 +44,37 @@ public class ArmController {
     {
         if(_gamepad2.a){
             // set pixelDropper in position for dropping the pixels
-            rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
+            this.rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
         } else if(_gamepad2.y){
             // set pixelDropper in position for getting the pixels
-            rd1.pixelDropperServo.setPosition(0.1); // TODO: value to be adapted
+            this.rd1.pixelDropperServo.setPosition(0.1); // TODO: value to be adapted
         }
 
     }
 
     public void extendArm()
     {
-        rd1.armLifterMotor.setTargetPosition(2000); // 2391
-        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rd1.armLifterMotor.setPower(0.75);
+        this.rd1.armLifterMotor.setTargetPosition(2000); // 2391
+        this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        this.rd1.armLifterMotor.setPower(0.75);
     }
 
     public void retractArm()
     {
-        rd1.armLifterMotor.setTargetPosition(0);
-        rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rd1.armLifterMotor.setPower(0.75);
+        this.rd1.armLifterMotor.setTargetPosition(0);
+        this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        this.rd1.armLifterMotor.setPower(0.75);
     }
 
     public void dropPixel()
     {
         // set pixelDropper in position for dropping the pixels
-        rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
+        this.rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
     }
 
     public void returnPixelDropper()
     {
         // set pixelDropper in position for dropping the pixels
-        rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
+        this.rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
     }
 }
