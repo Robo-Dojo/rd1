@@ -115,28 +115,30 @@ public class AutonomousModeBlueShort extends LinearOpMode {
             }
 
             else if(objectDetectionResult == 3){
-                // Mergem inainte
-                chassyController.forward(1, 700);
-                sleep(5000);
                 // Punem pixelul
-                chassyController.forward45DegreeLeft(0.3, 600);
-                sleep(50000);
+                chassyController.forward45DegreeLeft(0.5, 450);
+                chassyController.resetEncoders();
                 // Dam inapoi
-                chassyController.reverse(1, 500);
-                sleep(5000);
+                chassyController.reverse(1, 400);
                 // Ne orientam cu backboardul
                 chassyController.rotate90Left(1);
                 // Reset
                 chassyController.resetEncoders();
-                sleep(5000);
                 // Mergem putin inainte
-                chassyController.forward(1, 500);
+                chassyController.forward(1, 1200);
+                chassyController.resetEncoders();
                 // Ne aliniem cu backboardul
-                chassyController.right(1, 300);
+                chassyController.rotate90Right(1);
+                chassyController.resetEncoders();
+                chassyController.forward(1, 450);
+                chassyController.resetEncoders();
+                chassyController.rotate90Left(1);
+                chassyController.resetEncoders();
                 // Ne apropiem incet de backboard
-                chassyController.forward(0.3, 200);
+                chassyController.forward(0.3, 800);
                 // Reset
                 chassyController.resetEncoders();
+                sleep(10000);
                 // Extindem viperele
                 ArmController.extendArm();
                 // Actionam cupa
