@@ -147,10 +147,10 @@ public class ChassyController {
 
     public void forward45DegreeRight(double power, int ticks) {
         // Go forward
-        autonomousMovement(power, ticks, ticks+1300, ticks, ticks+1300);
+        autonomousMovement(power, ticks, ticks+1150, ticks, ticks+1150);
         resetEncoders();
         // Go backward
-        autonomousMovement(power, 0, -1210, 0, -1210);
+        autonomousMovement(power, 0, -1150, 0, -1150);
     }
 
     public void rotate90Left(double power) {

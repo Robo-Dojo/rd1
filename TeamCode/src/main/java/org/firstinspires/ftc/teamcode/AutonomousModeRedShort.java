@@ -194,6 +194,7 @@ public class AutonomousModeRedShort extends LinearOpMode {
                 // Punem pixelul
                 chassyController.forward45DegreeLeft(0.7, 550);
                 chassyController.resetEncoders();
+                chassyController.forward(1, 200);
                 // Ne orientam cu backboardul
                 chassyController.rotate90Right(1);
                 // Reset
@@ -218,7 +219,7 @@ public class AutonomousModeRedShort extends LinearOpMode {
                 chassyController.rotate90Right(1);
                 chassyController.resetEncoders();
                 // Mergem la stanga
-                chassyController.forward(1, 1200);
+                chassyController.forward(1, 600);
                 chassyController.resetEncoders();
                 chassyController.rotate90Left(1);
                 chassyController.resetEncoders();

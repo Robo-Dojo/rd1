@@ -19,7 +19,7 @@ public class ArmController {
     {
         this.rd1 = rd1;
         this.telemetry = telemetry;
-        rd1.pixelDropperServo.setPosition(0.91); // TODO: value to be adapted
+        rd1.pixelDropperServo.setPosition(0.915); // TODO: value to be adapted
     }
 
     public void armLifter(Gamepad _gamepad2)
@@ -31,7 +31,7 @@ public class ArmController {
         // telemetry code for dev purpose
         if(armDropper) {
             armLifterPosition = 0;
-            this.rd1.pixelDropperServo.setPosition(0.91);
+            this.rd1.pixelDropperServo.setPosition(0.915);
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
@@ -109,7 +109,7 @@ public class ArmController {
     public void returnPixelDropper()
     {
         // set pixelDropper in position for dropping the pixels
-        this.rd1.pixelDropperServo.setPosition(0.91); // TODO: value to be adapted
+        this.rd1.pixelDropperServo.setPosition(0.915); // TODO: value to be adapted
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
