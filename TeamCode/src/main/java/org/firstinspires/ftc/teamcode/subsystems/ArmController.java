@@ -19,7 +19,7 @@ public class ArmController {
     {
         this.rd1 = rd1;
         this.telemetry = telemetry;
-        rd1.pixelDropperServo.setPosition(0.1); // TODO: value to be adapted
+        rd1.pixelDropperServo.setPosition(0.91); // TODO: value to be adapted
     }
 
     public void armLifter(Gamepad _gamepad2)
@@ -31,7 +31,12 @@ public class ArmController {
         // telemetry code for dev purpose
         if(armDropper) {
             armLifterPosition = 0;
-            this.rd1.pixelDropperServo.setPosition(0.68);
+            this.rd1.pixelDropperServo.setPosition(0.91);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             this.rd1.armLifterMotor.setTargetPosition(armLifterPosition);
             this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             this.rd1.armLifterMotor.setPower(0.75);
@@ -64,6 +69,23 @@ public class ArmController {
         this.rd1.armLifterMotor.setTargetPosition(2000); // 2391
         this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         this.rd1.armLifterMotor.setPower(0.75);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void extendArmTEMP()
+    {
+        this.rd1.armLifterMotor.setTargetPosition(1000); // 2391
+        this.rd1.armLifterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        this.rd1.armLifterMotor.setPower(0.75);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void retractArm()
@@ -76,12 +98,22 @@ public class ArmController {
     public void dropPixel()
     {
         // set pixelDropper in position for dropping the pixels
-        this.rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
+        this.rd1.pixelDropperServo.setPosition(0.3); // TODO: value to be adapted
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void returnPixelDropper()
     {
         // set pixelDropper in position for dropping the pixels
-        this.rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
+        this.rd1.pixelDropperServo.setPosition(0.91); // TODO: value to be adapted
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

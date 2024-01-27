@@ -23,7 +23,7 @@ public class DroneLauncher {
         if(_gamepad2.right_trigger!=0){
             //if right trigger's position is changed
             telemetry.addData("changing position", this.rd1.servoDrone);
-            this.rd1.servoDrone.setPosition(1);
+            this.rd1.servoDrone.setPosition(0.4);
         } else {
             //if right trigger's position is static
             telemetry.addData("servo should be locked in a set position", this.rd1.servoDrone);

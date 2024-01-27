@@ -47,7 +47,7 @@ public class ObjectDetection {
     public int getResult(WebcamName webcam, Telemetry telemetry) {
         // Declare result and part of screen size variables
         int result = 0;
-        int partScreenSize = 426;
+        int partScreenSize = 495;
 
         // Declare X and Y variables
         double teamPropX = 0;

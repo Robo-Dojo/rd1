@@ -154,11 +154,11 @@ public class ChassyController {
     }
 
     public void rotate90Left(double power) {
-        autonomousMovement(power, 740,-740,740,-740);
+        autonomousMovement(power, 850,-850,850,-850);
     }
 
     public void rotate90Right(double power) {
-        autonomousMovement(power, -740,740,-740,740);
+        autonomousMovement(power, -850,850,-850,850);
     }
 
     public void resetEncoders()
