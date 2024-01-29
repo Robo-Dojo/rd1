@@ -26,10 +26,6 @@ public class AutonomousModeBlueShort extends LinearOpMode {
         ObjectDetection objDet = new ObjectDetection();
         ChassyController chassyController = new ChassyController(rd1, telemetry);
 
-        int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
-        telemetry.addData("Object Detection Result:", objectDetectionResult);
-        telemetry.update();
-
         waitForStart();
 
         // TODO: code all steps
@@ -39,7 +35,8 @@ public class AutonomousModeBlueShort extends LinearOpMode {
             telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
             telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
             telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
-
+            int objectDetectionResult = objDet.getResult(rd1.webcam, telemetry);
+            telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
             //rd1.pixelDropperServo.setPosition(0.91);
@@ -86,15 +83,16 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 chassyController.forward(1, 1400);
                 chassyController.resetEncoders();
                 // Ne aliniem cu backboardul
-                chassyController.forward(0.3, 150);
+                chassyController.forward(0.3, 75);
                 chassyController.resetEncoders();
                 // Extindem viperele
-                ArmController.extendArm();
+                ArmController.extendArmTEMP();
 //                // Actionam cupa
                 ArmController.dropPixel();
 //                // Punem cupa la loc
                 ArmController.returnPixelDropper();
 //                // Retragem viperele
+                ArmController.extendArm();
                 ArmController.retractArm();
                 // Dam cu spatele putin
                 chassyController.reverse(1, 300);
@@ -102,7 +100,7 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 chassyController.rotate90Left(1);
                 chassyController.resetEncoders();
                 // Mergem la stanga
-                chassyController.forward(1, 1000);
+                chassyController.forward(1, 800);
                 chassyController.resetEncoders();
                 chassyController.rotate90Right(1);
                 chassyController.resetEncoders();
@@ -164,13 +162,13 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 chassyController.forward(0.3, 200);
                 // Reset
                 chassyController.resetEncoders();
-                // Extindem viperele
-                ArmController.extendArm();
-                // Actionam cupa
+                ArmController.extendArmTEMP();
+//                // Actionam cupa
                 ArmController.dropPixel();
-                // Punem cupa la loc
+//                // Punem cupa la loc
                 ArmController.returnPixelDropper();
-                // Retragem viperele
+//                // Retragem viperele
+                ArmController.extendArm();
                 ArmController.retractArm();
                 // Dam cu spatele putin
                 chassyController.reverse(1, 200);
@@ -213,12 +211,13 @@ public class AutonomousModeBlueShort extends LinearOpMode {
                 // Reset
                 chassyController.resetEncoders();
                 // Extindem viperele
-                ArmController.extendArm();
-                // Actionam cupa
+                ArmController.extendArmTEMP();
+//                // Actionam cupa
                 ArmController.dropPixel();
-                // Punem cupa la loc
+//                // Punem cupa la loc
                 ArmController.returnPixelDropper();
-                // Retragem viperele
+//                // Retragem viperele
+                ArmController.extendArm();
                 ArmController.retractArm();
                 // Dam cu spatele putin
                 chassyController.reverse(1, 300);

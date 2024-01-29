@@ -72,7 +72,7 @@ public class AutonomousModeRedShort extends LinearOpMode {
                 // Punem pixelul
                 chassyController.forward45DegreeRight(0.7, 550);
                 chassyController.resetEncoders();
-                chassyController.reverse(1, 450);
+                chassyController.reverse(1, 350);
                 chassyController.resetEncoders();
                 //chassyController.forward(1, 100);
                 // Ne orientam cu backboardul
@@ -149,17 +149,19 @@ public class AutonomousModeRedShort extends LinearOpMode {
                 // Mergem spre linie cu oprire putin inainte
                 chassyController.forward(1,1000);
                 // Mergem incet spre linie
-                chassyController.forward(0.6,200);
+                chassyController.forward(0.6,350);
+                chassyController.resetEncoders();
                 // Dam cu spatele, putin mai mult ca sa nu lovim pixelul
-                chassyController.reverse(1, 300);
+                chassyController.reverse(1, 200);
                 // Reset
                 chassyController.resetEncoders();
                 // Rotim spre backboard
-                chassyController.rotate90Right(1);
+                chassyController.rotate90Right(0.7);
                 // Reset
                 chassyController.resetEncoders();
                 // Mergem spre backboard, ne oprim putin inainte
-                chassyController.forward(1, 1500);
+                chassyController.forward(1, 1300);
+                chassyController.resetEncoders();
                 // Optional, ne aliniem cu apriltagul din mijloc
                 // chassyController. left sau right 200?
                 // Ne apropiem incet de backboard
