@@ -20,10 +20,9 @@ public class DroneLauncher {
     {
         //function that controls the drone launcher
 
-        if(_gamepad2.right_trigger!=0){
+        if(_gamepad2.right_trigger!=0 && _gamepad2.left_trigger!=0) {
             //if right trigger's position is changed
-            telemetry.addData("changing position", this.rd1.servoDrone);
-            this.rd1.servoDrone.setPosition(0.4);
+            this.rd1.servoDrone.setPosition(-0.1);
         } else {
             //if right trigger's position is static
             telemetry.addData("servo should be locked in a set position", this.rd1.servoDrone);
