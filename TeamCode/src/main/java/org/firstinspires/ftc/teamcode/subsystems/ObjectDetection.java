@@ -47,32 +47,46 @@ public class ObjectDetection {
     public int getResult(WebcamName webcam, Telemetry telemetry) {
         // Declare result and part of screen size variables
         int result = 0;
-        int partScreenSize = 495;
+        int part1ScreenSize = 218;  //Change this in case of errors
+        int part2ScreenSize = 450;  //Change this in case of errors
 
         // Declare X and Y variables
-        double teamPropX = 0;
-        double teamPropY = 0;
+        double teamPropX = -1;  //Change this to -1
+        double teamPropY = -1;  //Change this to -1
 
         // Initialise processor
         initTfod(webcam);
 
-        for(int i=0; i < 100; i++) {
+//        for(int i=0; i < 100; i++) {
+//            List<Recognition> currentRecognitions = tfod.getRecognitions();
+//            for (Recognition recognition : currentRecognitions) {
+//                telemetry.addData("Detected: ", recognition.getLabel(), " - ", recognition.getConfidence());
+//                teamPropX = (recognition.getLeft() + recognition.getRight()) / 2 ;
+//                teamPropY = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+//                if(teamPropX != 0 || teamPropY != 0) {
+//                    break;
+//                }
+//            }
+//            if(teamPropX != 0 || teamPropY != 0) {
+//                break;
+//            }
+//            try {
+//                Thread.sleep(40);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+
+        // New code
+        while(teamPropX == -1 || teamPropY == -1) {
             List<Recognition> currentRecognitions = tfod.getRecognitions();
             for (Recognition recognition : currentRecognitions) {
                 telemetry.addData("Detected: ", recognition.getLabel(), " - ", recognition.getConfidence());
                 teamPropX = (recognition.getLeft() + recognition.getRight()) / 2 ;
                 teamPropY = (recognition.getTop()  + recognition.getBottom()) / 2 ;
-                if(teamPropX != 0 || teamPropY != 0) {
+                if(teamPropX != -1 || teamPropY != -1) {
                     break;
                 }
-            }
-            if(teamPropX != 0 || teamPropY != 0) {
-                break;
-            }
-            try {
-                Thread.sleep(40);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
             }
         }
 
@@ -80,12 +94,12 @@ public class ObjectDetection {
 
         tfod.shutdown();
 
-        if (teamPropX == 0) {
-            result = 3;
-        } else if (teamPropX < partScreenSize) {
+        if (teamPropX < part1ScreenSize) {
+            result = 1; //Modificat
+        } else if (part1ScreenSize <= teamPropX && teamPropX <= part2ScreenSize) {
             result = 2;
         } else {
-            result = 1;
+            result = 3; //Modificat
         }
         telemetry.addData("result", result);
         telemetry.update();
@@ -162,14 +176,14 @@ public class ObjectDetection {
         builder.setCamera(webcam);
 
         // Choose a camera resolution. Not all cameras support all resolutions.
-        builder.setCameraResolution(new Size(640, 480));
+        builder.setCameraResolution(new Size(640, 360));
 
 
         // Enable the RC preview (LiveView).  Set "false" to omit camera monitoring.
         //builder.enableLiveView(true);
 
         // Set the stream format; MJPEG uses less bandwidth than default YUY2.
-        builder.setStreamFormat(VisionPortal.StreamFormat.YUY2);
+        builder.setStreamFormat(VisionPortal.StreamFormat.MJPEG);
 
         // Choose whether or not LiveView stops if no processors are enabled.
         // If set "true", monitor shows solid orange screen if no processors enabled.
@@ -183,7 +197,7 @@ public class ObjectDetection {
         visionPortal = builder.build();
 
         // Set confidence threshold for TFOD recognitions, at any time.
-        tfod.setMinResultConfidence(0.40f);
+        tfod.setMinResultConfidence(0.75f);
 
         // Disable or re-enable the TFOD processor at any time.
         //visionPortal.setProcessorEnabled(tfod, true);

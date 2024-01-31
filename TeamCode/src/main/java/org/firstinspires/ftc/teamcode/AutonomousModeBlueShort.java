@@ -39,6 +39,9 @@ public class AutonomousModeBlueShort extends LinearOpMode {
             telemetry.addData("Object Detection Result:", objectDetectionResult);
             telemetry.update();
 
+            // Temporary sleep
+            sleep(100000);
+
             //rd1.pixelDropperServo.setPosition(0.91);
 
             //TEMPORAR - 1
