@@ -19,7 +19,7 @@ public class ArmController {
     {
         this.rd1 = rd1;
         this.telemetry = telemetry;
-        rd1.pixelDropperServo.setPosition(0.885); // TODO: value to be adapted
+        rd1.pixelDropperServo.setPosition(0.9);
     }
 
     public void armLifter(Gamepad _gamepad2)
@@ -27,11 +27,15 @@ public class ArmController {
         // get joystick params
         boolean armLifter= _gamepad2.right_bumper;
         boolean armDropper= _gamepad2.left_bumper;
+        boolean robotLifter = _gamepad2.dpad_up;
+        boolean robotUnlift = _gamepad2.dpad_left;
+
 
         // telemetry code for dev purpose
+        /*
         if(armDropper) {
             armLifterPosition = 0;
-            this.rd1.pixelDropperServo.setPosition(0.885);
+            //this.rd1.pixelDropperServo.setPosition(0.885);
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
@@ -49,17 +53,32 @@ public class ArmController {
                 this.rd1.armLifterMotor.setPower(0.75);
             }
         }
-
+        */
+        if(robotLifter){
+            if(this.rd1.armLifterMotor.getCurrentPosition() < 2200) this.rd1.armLifterMotor.setPower(0.75);
+            else this.rd1.armLifterMotor.setPower(0);
+        }
+        else if(robotUnlift){
+            if(this.rd1.armLifterMotor.getCurrentPosition() > 2) this.rd1.armLifterMotor.setPower(-0.75);
+            else this.rd1.armLifterMotor.setPower(0);
+        }
+        else{
+            this.rd1.armLifterMotor.setPower(0);
+        }
     }
 
     public void pixelDropper(Gamepad _gamepad2)
     {
         if(_gamepad2.a){
             // set pixelDropper in position for dropping the pixels
-            this.rd1.pixelDropperServo.setPosition(0.68); // TODO: value to be adapted
+            //this.rd1.pixelDropperServo.setPosition(0.70); // TODO: value to be adapted
+            //this.rd1.dropperMoverServo.setPosition(0.3);
+            rd1.pixelDropperServo.setPosition(0.9);
         } else if(_gamepad2.y){
             // set pixelDropper in position for getting the pixels
-            this.rd1.pixelDropperServo.setPosition(0.1); // TODO: value to be adapted
+            //this.rd1.pixelDropperServo.setPosition(0.1); // TODO: value to be adapted
+            //this.rd1.dropperMoverServo.setPosition(0.7);
+            rd1.pixelDropperServo.setPosition(0.3);
         }
 
     }

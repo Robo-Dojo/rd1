@@ -16,7 +16,7 @@ public class DcpMode extends LinearOpMode {
         ArmController ArmController = new ArmController(rd1, telemetry);
         ChassyController ChassyController = new ChassyController(rd1, telemetry);
         DroneLauncher DroneLauncher = new DroneLauncher(rd1, telemetry);
-        PixelGabber PixelGrabber = new PixelGabber(rd1);
+        PixelGrabber PixelGrabber = new PixelGrabber(rd1);
         // endregion
 
         waitForStart();
@@ -31,15 +31,15 @@ public class DcpMode extends LinearOpMode {
             ArmController.armLifter(gamepad2);
             ArmController.pixelDropper(gamepad2);
 
-            DroneLauncher.droneReleaser(gamepad2);
+            //DroneLauncher.droneReleaser(gamepad2);
 
             PixelGrabber.pixelGrabber(gamepad2);
-
+            /*
             telemetry.addData("FRM= ", rd1.frontRightMotor.getCurrentPosition());
             telemetry.addData("FLM= ", rd1.frontLeftMotor.getCurrentPosition());
             telemetry.addData("RLM= ", rd1.rearLeftMotor.getCurrentPosition());
             telemetry.addData("RRM= ", rd1.rearRightMotor.getCurrentPosition());
-
+            */
             // update all telemetry visual data
             telemetry.update();
         }

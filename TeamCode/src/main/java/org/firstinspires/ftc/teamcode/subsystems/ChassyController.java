@@ -26,17 +26,17 @@ public class ChassyController {
     public void dcpMovement(Gamepad _gamepad1)
     {
         // read values gamepad 1
-        double accelerator = (0.3 + _gamepad1.right_trigger);
-        double gp1Y = -(_gamepad1.right_stick_y*accelerator);
-        double gp1X = -(_gamepad1.right_stick_x*accelerator);
-        double gp1RotationX = _gamepad1.left_stick_x*0.6;
+        //double accelerator = (0.25 + _gamepad1.right_trigger);
+        double gp1Y = -(_gamepad1.right_trigger-_gamepad1.left_trigger);
+        double gp1X = _gamepad1.right_stick_x;
+        double gp1RotationX = _gamepad1.left_stick_x*0.4;
 
         // calculate engines power
         double denominator = Math.max(Math.abs(gp1Y) + Math.abs(gp1X) + Math.abs(gp1RotationX), 1);
-        double frontLeftPower = ((gp1Y - gp1X + gp1RotationX) / denominator);
-        double rearLeftPower = ((gp1Y + gp1X + gp1RotationX) / denominator);
-        double frontRightPower = ((gp1Y - gp1X - gp1RotationX) / denominator);
-        double rearRightPower = ((gp1Y + gp1X - gp1RotationX) / denominator);
+        double frontLeftPower = ((gp1Y + gp1X - gp1RotationX) / denominator);
+        double rearLeftPower = ((gp1Y - gp1X - gp1RotationX) / denominator);
+        double frontRightPower = ((gp1Y - gp1X + gp1RotationX) / denominator);
+        double rearRightPower = ((gp1Y + gp1X + gp1RotationX) / denominator);
 
         // assign values to engines
         this.rd1.frontLeftMotor.setPower(frontLeftPower);
