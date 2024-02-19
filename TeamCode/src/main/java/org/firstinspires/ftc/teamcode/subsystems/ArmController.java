@@ -32,7 +32,7 @@ public class ArmController {
 
 
         // telemetry code for dev purpose
-        /*
+
         if(armDropper) {
             armLifterPosition = 0;
             //this.rd1.pixelDropperServo.setPosition(0.885);
@@ -53,13 +53,13 @@ public class ArmController {
                 this.rd1.armLifterMotor.setPower(0.75);
             }
         }
-        */
+
         if(robotLifter){
-            if(this.rd1.armLifterMotor.getCurrentPosition() < 2200) this.rd1.armLifterMotor.setPower(0.75);
+            if(this.rd1.armLifterMotor.getCurrentPosition() < 2200) this.rd1.armLifterMotor.setPower(0.9);
             else this.rd1.armLifterMotor.setPower(0);
         }
         else if(robotUnlift){
-            if(this.rd1.armLifterMotor.getCurrentPosition() > 2) this.rd1.armLifterMotor.setPower(-0.75);
+            if(this.rd1.armLifterMotor.getCurrentPosition() > 2) this.rd1.armLifterMotor.setPower(-0.9);
             else this.rd1.armLifterMotor.setPower(0);
         }
         else{
