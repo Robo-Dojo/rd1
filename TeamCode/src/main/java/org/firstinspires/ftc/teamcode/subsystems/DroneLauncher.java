@@ -20,7 +20,7 @@ public class DroneLauncher {
     {
         //function that controls the drone launcher
 
-        if(_gamepad2.a!=false && _gamepad2.x!=false) {
+        if(_gamepad2.b!=false && _gamepad2.x!=false) {
             //if right trigger's position is changed
             this.rd1.servoDrone.setPosition(-0.1);
         } else {
