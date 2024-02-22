@@ -28,7 +28,7 @@ public class HardwareInit {
         rearRightMotor = hwMap.dcMotor.get("rearRightMotor");
         pixelGrabber = hwMap.dcMotor.get("pixelGrabber");
 
-        armLifterMotor = hwMap.get(DcMotor.class,"armLifterMotor");
+        armLifterMotor = hwMap.get(DcMotor.class,"armLifter");
         pixelDropperServo = hwMap.get(Servo.class, "pixelDropperServo");
         servoDrone = hwMap.get(Servo.class,"droneLauncher");
 
@@ -38,7 +38,7 @@ public class HardwareInit {
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rearLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rearRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armLifterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //armLifterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         if(!isAutonom) {
             // specify motors run with encoders
