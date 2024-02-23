@@ -26,8 +26,8 @@ public class ChassyController {
     public void dcpMovement(Gamepad _gamepad1)
     {
         // read values gamepad 1
-        double gp1Y = -(-_gamepad1.right_trigger+_gamepad1.left_trigger);
-        double gp1X = _gamepad1.right_stick_x*1.1;
+        double gp1Y = -(_gamepad1.right_trigger-_gamepad1.left_trigger);
+        double gp1X = -_gamepad1.right_stick_x*1.1;
         double gp1RotationX = _gamepad1.left_stick_x;
 
         // calculate engines power
